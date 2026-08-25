@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import { MessageCircle, ArrowRight } from 'lucide-react'
+import React, { useState } from 'react'
+import { MessageCircle, ArrowRight, Sparkles } from 'lucide-react'
+import { Button, Card, Badge } from '@/components/ui'
 import OrderModal from '@/components/ui/OrderModal'
 
 export default function CTASection() {
@@ -9,47 +10,85 @@ export default function CTASection() {
 
   return (
     <>
-      <section id="pesan" className="py-24 px-6 bg-[#060D1A] relative overflow-hidden">
-        {/* BG decoration */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <section id="pesan" className="py-24 px-4 sm:px-6 bg-[#0A192F] relative overflow-hidden border-t-2 border-black">
+        {/* Subtle grid pattern */}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none opacity-10"
+          style={{
+            backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)',
+            backgroundSize: '24px 24px'
+          }}
+        />
 
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <div className="inline-block mb-5 text-xs font-semibold text-blue-400 tracking-widest uppercase">
-            ✦ Siap Mulai?
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-            Wujudkan Project Impian
-            <br />
-            <span className="text-blue-400">Sekarang Juga</span>
-          </h2>
-          <p className="text-gray-400 text-base mb-10 leading-relaxed max-w-xl mx-auto">
-            Konsultasi gratis, tanpa komitmen. Tim kami siap membantu Anda dari nol hingga project selesai.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold text-sm transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/30"
-            >
-              <MessageCircle size={16} /> Konsultasi via WhatsApp
-            </button>
-            <a href="#portofolio" className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-full font-semibold text-sm transition">
-              Lihat Portofolio <ArrowRight size={16} />
-            </a>
-          </div>
+        <div className="max-w-5xl mx-auto relative z-10">
+          <Card
+            variant="accent"
+            shadowSize="lg"
+            rounded="3xl"
+            className="p-8 sm:p-14 text-center border-2 border-black relative overflow-hidden"
+          >
+            {/* Background geometric accents */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#55DE8F]/30 rounded-full blur-2xl pointer-events-none" />
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 mt-16 pt-12 border-t border-white/5">
-            {[
-              { value: '100+', label: 'Project Selesai' },
-              { value: '50+', label: 'Klien Puas' },
-              { value: '3 Th', label: 'Pengalaman' },
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <p className="text-3xl font-bold text-white mb-1" style={{ fontFamily: 'var(--font-display)' }}>{stat.value}</p>
-                <p className="text-gray-500 text-xs font-medium">{stat.label}</p>
+            <div className="max-w-3xl mx-auto relative z-10">
+              <Badge variant="navy" size="md" className="mb-6">
+                ✦ SIAP MEMULAI PROJECT ANDA?
+              </Badge>
+
+              <h2
+                className="text-3xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                Wujudkan Skripsi & <br />
+                Sistem Impian Sekarang
+              </h2>
+
+              <p className="text-blue-100 text-base sm:text-lg mb-10 max-w-xl mx-auto font-medium leading-relaxed">
+                Konsultasikan ide Anda secara gratis tanpa komitmen. Tim kami siap membantu pengerjaan dari nol hingga selesai tuntas bergaransi.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                <Button
+                  variant="primary"
+                  size="xl"
+                  shape="default"
+                  onClick={() => setIsModalOpen(true)}
+                  iconLeft={<MessageCircle size={20} />}
+                  className="text-base sm:text-lg w-full sm:w-auto"
+                >
+                  Konsultasi via WhatsApp
+                </Button>
+
+                <Button
+                  variant="white"
+                  size="xl"
+                  shape="default"
+                  href="#portofolio"
+                  iconRight={<ArrowRight size={20} />}
+                  className="text-base sm:text-lg w-full sm:w-auto"
+                >
+                  Lihat Portofolio
+                </Button>
               </div>
-            ))}
-          </div>
+
+              {/* Stats Footer in CTA */}
+              <div className="grid grid-cols-3 gap-4 pt-8 border-t-2 border-black/20">
+                {[
+                  { value: '2.500+', label: 'Project Selesai' },
+                  { value: '99.4%', label: 'Tingkat ACC & Lulus' },
+                  { value: '24/7', label: 'Fast Support' },
+                ].map((stat, i) => (
+                  <div key={i} className="text-center">
+                    <p className="text-2xl sm:text-4xl font-black text-white mb-0.5" style={{ fontFamily: 'var(--font-display)' }}>
+                      {stat.value}
+                    </p>
+                    <p className="text-blue-200 text-[11px] sm:text-xs font-bold uppercase tracking-wider">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Card>
         </div>
       </section>
 

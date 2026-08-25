@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
 import { MessageCircle } from 'lucide-react'
@@ -17,12 +17,12 @@ export default function FloatingWA() {
   useEffect(() => {
     async function fetchSettings() {
       try {
-        const { data, error } = await supabase.from('settings').select('wa_number').limit(1).single()
+        const { data } = await supabase.from('settings').select('wa_number').limit(1).single()
         if (data && data.wa_number) {
           setWaNumber(data.wa_number)
         }
       } catch (e) {
-        console.error("Error fetching WA number", e)
+        console.error('Error fetching WA number', e)
       }
     }
     fetchSettings()
@@ -41,16 +41,14 @@ export default function FloatingWA() {
         onMouseLeave={() => setShowText(false)}
       >
         <div 
-          className={`bg-[#25D366] text-white px-4 py-2.5 rounded-xl font-bold shadow-lg transition-all duration-300 origin-right ${
+          className={`bg-[#55DE8F] text-black border-2 border-black px-4 py-2 rounded-xl font-black text-xs uppercase tracking-wider shadow-[3px_3px_0px_#000] transition-all duration-200 origin-right ${
             showText ? 'scale-100 opacity-100' : 'scale-90 opacity-0 hidden md:block pointer-events-none'
           }`}
         >
           Konsultasi Gratis
         </div>
-        <div className="bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform hover:shadow-[#25D366]/40 relative">
-          <MessageCircle size={28} />
-          {/* Pulse effect */}
-          <span className="absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-30 animate-ping" />
+        <div className="bg-[#55DE8F] text-black w-14 h-14 rounded-2xl border-2 border-black flex items-center justify-center shadow-[4px_4px_0px_#000] hover:shadow-[6px_6px_0px_#000] hover:-translate-y-1 active:translate-y-1 active:shadow-[1px_1px_0px_#000] transition-all relative">
+          <MessageCircle size={28} className="fill-black/10 text-black" />
         </div>
       </a>
     </div>

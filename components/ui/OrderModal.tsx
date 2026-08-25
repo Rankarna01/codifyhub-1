@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabaseClient'
-import { X, Send, User, Mail, Phone, Briefcase, FileText, Loader2, MessageSquare, Check, Sparkles } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { X, Send, Loader2, Check, Sparkles, ShieldCheck } from 'lucide-react'
 import { Toast } from '@/lib/swal'
+import { Button, Badge } from '@/components/ui'
 
 interface OrderModalProps {
   isOpen: boolean
@@ -12,31 +12,31 @@ interface OrderModalProps {
 
 export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
   const [formData, setFormData] = useState({
-    name: '', email: '', whatsapp: '',
-    service: 'Joki Tugas / Skripsi IT', details: ''
+    name: '',
+    email: '',
+    whatsapp: '',
+    service: 'Joki Tugas / Skripsi IT',
+    details: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [waNumber, setWaNumber] = useState('6282275373233')
 
-  // Load WA number from settings
   useEffect(() => {
     fetch('/api/settings')
       .then(r => r.json())
       .then(json => {
         if (json.data?.whatsapp_admin) setWaNumber(json.data.whatsapp_admin)
       })
-      .catch(() => {}) // silently fail, fallback to default
+      .catch(() => {})
   }, [])
 
-  // Close on Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     if (isOpen) document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
   }, [isOpen, onClose])
 
-  // Prevent body scroll
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -59,8 +59,6 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
         }),
       })
 
-      const json = await res.json()
-
       if (!res.ok) {
         Toast.fire({ icon: 'error', title: 'Gagal menyimpan pesanan!' })
         setIsSubmitting(false)
@@ -71,12 +69,12 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
       setSubmitted(true)
 
       setTimeout(() => {
-        const text = `Halo Admin CodifyHub! 👋%0A%0ASaya ingin memesan layanan:%0A• Nama: ${formData.name}%0A• Email: ${formData.email}%0A• Layanan: ${formData.service}%0A• Detail: ${formData.details}%0A%0AMohon infonya, terima kasih!`
+        const text = `Halo Admin CodifyHub! 👋%0A%0ASaya ingin konsultasi / order:%0A• Nama: ${formData.name}%0A• WhatsApp: ${formData.whatsapp}%0A• Email: ${formData.email || '-' }%0A• Layanan: ${formData.service}%0A• Detail: ${formData.details}%0A%0AMohon info dan estimasinya, terima kasih!`
         window.open(`https://wa.me/${waNumber}?text=${text}`, '_blank')
         onClose()
         setSubmitted(false)
         setFormData({ name: '', email: '', whatsapp: '', service: 'Joki Tugas / Skripsi IT', details: '' })
-      }, 1500)
+      }, 1200)
 
     } catch (err) {
       Toast.fire({ icon: 'error', title: 'Gagal terhubung ke server.' })
@@ -92,124 +90,148 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" />
 
-      {/* Modal */}
-      <div className="relative bg-white rounded-[24px] shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col md:flex-row transform transition-all">
+      {/* Neo-Brutalist Modal Card */}
+      <div className="relative bg-white border-2 border-black rounded-3xl shadow-[8px_8px_0px_#000000] w-full max-w-4xl overflow-hidden flex flex-col md:flex-row transform transition-all z-10">
         
-        {/* Left Column (Branding) - Hidden on mobile */}
-        <div className="hidden md:flex flex-col justify-between w-5/12 bg-[#0A192F] p-10 relative overflow-hidden">
-          {/* Abstract background shapes */}
-          <div className="absolute -top-32 -left-32 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
-          
+        {/* Left Column (Branding & Perks) */}
+        <div className="hidden md:flex flex-col justify-between w-5/12 bg-[#0A192F] text-white p-8 lg:p-10 relative overflow-hidden border-r-2 border-black">
           <div className="relative z-10">
-            <div className="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl flex items-center justify-center mb-8 shadow-xl">
-              <Sparkles className="text-blue-300" size={24} />
-            </div>
-            <h2 className="text-3xl font-bold text-white mb-5 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-              Mulai Perjalanan<br />Digital Anda.
+            <Badge variant="accent" size="sm" className="mb-6">
+              ✦ FAST RESPONSE 24/7
+            </Badge>
+            <h2 className="text-3xl font-black text-white mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              Konsultasi Project <br />
+              & Skripsi IT
             </h2>
-            <p className="text-blue-100/70 text-sm leading-relaxed pr-4">
-              Ceritakan visi dan kebutuhan bisnis Anda. Tim kami siap merancang solusi teknologi premium, cepat, dan transparan.
+            <p className="text-gray-300 text-xs lg:text-sm leading-relaxed font-medium">
+              Ceritakan kebutuhan sistem atau tugas Anda. Tim developer ahli kami siap merancang solusi cepat, tepat, dan bergaransi.
             </p>
           </div>
 
-          <div className="relative z-10 space-y-4">
+          <div className="relative z-10 space-y-3 pt-6">
             {[
-              'Konsultasi & Analisis Gratis',
-              'Transparan & Harga Fleksibel',
-              'Garansi Maintenance'
+              'Konsultasi 100% Gratis',
+              'Garansi Revisi & Bimbingan',
+              'Privasi Data Dijamin Aman'
             ].map((text, i) => (
-              <div key={i} className="flex items-center gap-3.5 text-sm text-blue-100/90 font-medium">
-                <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0">
+              <div key={i} className="flex items-center gap-3 text-xs lg:text-sm text-white font-bold">
+                <div className="w-5 h-5 rounded-full bg-[#55DE8F] border border-black flex items-center justify-center text-black flex-shrink-0">
                   <Check size={12} strokeWidth={3} />
                 </div>
-                {text}
+                <span>{text}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Right Column (Form) */}
-        <div className="w-full md:w-7/12 p-6 sm:p-10 relative bg-gray-50/50">
-          <button onClick={onClose} className="absolute top-6 right-6 text-gray-400 hover:text-gray-900 transition p-2 bg-white hover:bg-gray-100 border border-gray-200 shadow-sm rounded-full">
-            <X size={16} />
+        <div className="w-full md:w-7/12 p-6 sm:p-10 relative bg-[#FFFDF7]">
+          <button
+            onClick={onClose}
+            className="absolute top-5 right-5 text-black p-2 bg-white hover:bg-gray-100 border-2 border-black shadow-[2px_2px_0px_#000] rounded-xl transition"
+            aria-label="Tutup modal"
+          >
+            <X size={18} />
           </button>
 
-          <div className="mb-8 md:hidden">
-            <h2 className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'var(--font-display)' }}>Konsultasi Gratis</h2>
-            <p className="text-gray-500 text-sm mt-1.5">Isi form di bawah, kami segera membalas via WhatsApp.</p>
-          </div>
-          
-          <div className="hidden md:block mb-8">
-            <h3 className="text-xl font-bold text-gray-900">Form Pemesanan</h3>
-            <p className="text-gray-500 text-sm mt-1">Kami akan membalas pesan Anda secepatnya.</p>
+          <div className="mb-6">
+            <Badge variant="mint" size="sm" className="mb-2">
+              FORM PEMESANAN
+            </Badge>
+            <h3 className="text-2xl font-black text-gray-900" style={{ fontFamily: 'var(--font-display)' }}>
+              Mulai Konsultasi
+            </h3>
+            <p className="text-gray-600 text-xs sm:text-sm font-medium">
+              Isi data singkat berikut, Anda akan langsung terhubung ke WhatsApp Admin.
+            </p>
           </div>
 
           {submitted ? (
-            <div className="flex flex-col items-center justify-center py-16 gap-5 h-full">
-              <div className="relative">
-                <div className="absolute inset-0 bg-emerald-500/20 rounded-full animate-ping" />
-                <div className="w-20 h-20 bg-emerald-50 border-4 border-emerald-100 rounded-full flex items-center justify-center relative z-10">
-                  <Check className="text-emerald-500" size={36} strokeWidth={2.5} />
-                </div>
+            <div className="flex flex-col items-center justify-center py-12 gap-4">
+              <div className="w-16 h-16 bg-[#55DE8F] border-2 border-black rounded-2xl flex items-center justify-center shadow-[4px_4px_0px_#000]">
+                <Check className="text-black" size={32} strokeWidth={3} />
               </div>
               <div className="text-center">
-                <p className="font-bold text-gray-900 text-xl mb-2">Pesan Tersimpan!</p>
-                <p className="text-gray-500 text-sm">Anda akan dialihkan ke WhatsApp Admin...</p>
+                <p className="font-black text-gray-900 text-xl mb-1">Pesanan Tersimpan!</p>
+                <p className="text-gray-600 text-xs font-semibold">Membuka WhatsApp Admin...</p>
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold text-gray-600 uppercase tracking-wider">Nama / Instansi</label>
-                  <input required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})}
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all shadow-sm"
-                    placeholder="Masukkan nama" />
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[11px] font-black text-gray-800 uppercase tracking-wider">Nama Lengkap</label>
+                  <input
+                    required
+                    value={formData.name}
+                    onChange={e => setFormData({...formData, name: e.target.value})}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none shadow-[2px_2px_0px_#000]"
+                    placeholder="Contoh: Budi Santoso"
+                  />
                 </div>
-                <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold text-gray-600 uppercase tracking-wider">Nomor WhatsApp</label>
-                  <input type="tel" required value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})}
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all shadow-sm"
-                    placeholder="08xxxxxxxxxx" />
+                <div className="space-y-1">
+                  <label className="text-[11px] font-black text-gray-800 uppercase tracking-wider">Nomor WhatsApp</label>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.whatsapp}
+                    onChange={e => setFormData({...formData, whatsapp: e.target.value})}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none shadow-[2px_2px_0px_#000]"
+                    placeholder="08123456789"
+                  />
                 </div>
               </div>
               
-              <div className="space-y-1.5">
-                <label className="text-[11px] font-bold text-gray-600 uppercase tracking-wider">Email (Opsional)</label>
-                <input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})}
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all shadow-sm"
-                  placeholder="email@contoh.com" />
+              <div className="space-y-1">
+                <label className="text-[11px] font-black text-gray-800 uppercase tracking-wider">Email (Opsional)</label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={e => setFormData({...formData, email: e.target.value})}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none shadow-[2px_2px_0px_#000]"
+                  placeholder="budi@example.com"
+                />
               </div>
               
-              <div className="space-y-1.5">
-                <label className="text-[11px] font-bold text-gray-600 uppercase tracking-wider">Kategori Layanan</label>
-                <select value={formData.service} onChange={e => setFormData({...formData, service: e.target.value})}
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all shadow-sm appearance-none cursor-pointer">
+              <div className="space-y-1">
+                <label className="text-[11px] font-black text-gray-800 uppercase tracking-wider">Kategori Layanan</label>
+                <select
+                  value={formData.service}
+                  onChange={e => setFormData({...formData, service: e.target.value})}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-black text-sm font-bold focus:bg-[#FFF9E5] outline-none shadow-[2px_2px_0px_#000] cursor-pointer"
+                >
                   <option>Joki Tugas / Skripsi IT</option>
-                  <option>Sistem Profesional / Web Corporate</option>
                   <option>Website & Toko Online UMKM</option>
+                  <option>Sistem Profesional / Web Corporate</option>
+                  <option>Mentoring Coding Private</option>
                   <option>Konsultasi Lainnya</option>
                 </select>
               </div>
               
-              <div className="space-y-1.5">
-                <label className="text-[11px] font-bold text-gray-600 uppercase tracking-wider">Ceritakan Detailnya</label>
-                <textarea rows={3} value={formData.details} onChange={e => setFormData({...formData, details: e.target.value})}
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all shadow-sm resize-none"
-                  placeholder="Tuliskan kebutuhan fitur, referensi, atau deadline..."></textarea>
+              <div className="space-y-1">
+                <label className="text-[11px] font-black text-gray-800 uppercase tracking-wider">Detail Kebutuhan / Deadline</label>
+                <textarea
+                  rows={3}
+                  value={formData.details}
+                  onChange={e => setFormData({...formData, details: e.target.value})}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none shadow-[2px_2px_0px_#000] resize-none"
+                  placeholder="Ceritakan fitur sistem, judul skripsi, atau deadline..."
+                />
               </div>
               
-              <button type="submit" disabled={isSubmitting}
-                className="w-full bg-[#0A192F] text-white py-3.5 rounded-xl font-semibold text-sm hover:bg-[#122A50] hover:-translate-y-0.5 active:translate-y-0 transition-all flex justify-center items-center gap-2 shadow-lg shadow-[#0A192F]/25 disabled:opacity-70 disabled:hover:translate-y-0 mt-2">
-                {isSubmitting ? (
-                  <><Loader2 size={16} className="animate-spin" /> Memproses...</>
-                ) : (
-                  <><Send size={16} className="mr-1" /> Kirim & Lanjut ke WhatsApp</>
-                )}
-              </button>
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
+                fullWidth
+                isLoading={isSubmitting}
+                iconLeft={!isSubmitting ? <Send size={16} /> : undefined}
+                className="mt-3 text-sm font-black uppercase tracking-wider"
+              >
+                Kirim & Hubungkan ke WhatsApp
+              </Button>
             </form>
           )}
         </div>

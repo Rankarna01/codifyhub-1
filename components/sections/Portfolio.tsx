@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { ArrowUpRight, Loader2 } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { ArrowUpRight, Loader2, FolderGit2 } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
+import { Card, Badge, Button } from '@/components/ui'
 
 interface Project {
   id: string
@@ -19,73 +20,117 @@ export default function Portfolio() {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const { data } = await supabase
-        .from('projects')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(6)
-      
-      if (data) setProjects(data)
-      setLoading(false)
+      try {
+        const { data } = await supabase
+          .from('projects')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(6)
+        
+        if (data) setProjects(data)
+      } catch (err) {
+        console.error('Error fetching portfolio projects:', err)
+      } finally {
+        setLoading(false)
+      }
     }
 
     fetchProjects()
   }, [])
 
   return (
-    <section id="portofolio" className="py-24 px-6 bg-[#F8FAFC]">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-14">
+    <section id="portofolio" className="py-24 px-4 sm:px-6 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-4">
           <div>
-            <div className="inline-block mb-3 text-xs font-semibold text-gray-400 tracking-widest uppercase">Hasil Kerja Kami</div>
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: 'var(--font-display)' }}>
+            <Badge variant="mint" size="md" className="mb-3">
+              HASIL KERJA KAMI
+            </Badge>
+            <h2 className="text-3xl sm:text-5xl font-black text-gray-900" style={{ fontFamily: 'var(--font-display)' }}>
               Portofolio Project
             </h2>
           </div>
-          <p className="text-gray-500 max-w-xs text-sm mt-3 md:mt-0">Sebagian dari ratusan project yang telah kami selesaikan.</p>
+          <p className="text-gray-600 max-w-sm text-sm sm:text-base font-medium">
+            Sebagian dari ratusan sistem dan website yang telah kami kerjakan dengan standar industri.
+          </p>
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="animate-spin text-gray-400" size={32} />
+          <div className="flex flex-col items-center justify-center py-20">
+            <Loader2 className="animate-spin text-black mb-3" size={36} />
+            <p className="text-sm font-bold text-gray-700">Memuat portofolio...</p>
           </div>
         ) : projects.length === 0 ? (
-          <div className="text-center py-20 bg-white rounded-[28px] border border-gray-100">
-            <p className="text-gray-400 font-medium text-sm">Belum ada portofolio yang ditambahkan.</p>
-          </div>
+          <Card variant="slate" shadowSize="md" rounded="2xl" className="text-center py-16 px-6">
+            <div className="w-14 h-14 bg-white rounded-xl border-2 border-black flex items-center justify-center mx-auto mb-4 shadow-[2px_2px_0px_#000]">
+              <FolderGit2 size={24} className="text-black" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-1">Portofolio Segera Ditampilkan</h3>
+            <p className="text-gray-600 font-medium text-sm max-w-md mx-auto">
+              Hubungi tim kami untuk melihat sample live demo pengerjaan website, sistem skripsi, atau aplikasi bisnis sebelumnya.
+            </p>
+          </Card>
         ) : (
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, i) => {
-              // Pilih warna secara bergantian berdasarkan index untuk badge dan gradient
-              const colorChoices = ['from-blue-500 to-blue-700', 'from-rose-500 to-rose-700', 'from-violet-500 to-violet-700']
-              const color = colorChoices[i % colorChoices.length]
-              
+              const badgeVariants: ('accent' | 'mint' | 'blue' | 'coral' | 'purple')[] = ['accent', 'mint', 'blue', 'coral', 'purple']
+              const badgeVar = badgeVariants[i % badgeVariants.length]
+
               return (
-                <div key={project.id} className="group rounded-[28px] bg-white border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-500 flex flex-col">
-                  <div className="relative h-48 overflow-hidden bg-gray-100 flex-shrink-0">
-                    {project.image_url && (
+                <Card
+                  key={project.id}
+                  variant="white"
+                  interactive
+                  shadowSize="md"
+                  rounded="2xl"
+                  className="flex flex-col group overflow-hidden"
+                >
+                  <div className="relative h-48 overflow-hidden bg-gray-100 border-b-2 border-black flex-shrink-0">
+                    {project.image_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={project.image_url} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                      <img
+                        src={project.image_url}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-[#FFF9E5] text-gray-400 font-mono text-xs font-bold">
+                        [Preview Tidak Tersedia]
+                      </div>
                     )}
-                    <div className={`absolute inset-0 bg-gradient-to-t ${color} opacity-0 group-hover:opacity-60 transition duration-500`} />
                     {project.client_name && (
-                      <div className="absolute top-4 left-4 z-10">
-                        <span className={`bg-gradient-to-r ${color} text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg`}>
+                      <div className="absolute top-3 left-3 z-10">
+                        <Badge variant={badgeVar} size="sm">
                           {project.client_name}
-                        </span>
+                        </Badge>
                       </div>
                     )}
                   </div>
+
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="font-bold text-gray-900 text-base mb-2 line-clamp-2" style={{ fontFamily: 'var(--font-display)' }}>{project.title}</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3 flex-1">{project.description}</p>
+                    <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-2" style={{ fontFamily: 'var(--font-display)' }}>
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3 flex-1 font-medium">
+                      {project.description}
+                    </p>
+
                     {project.link && (
-                      <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-[#0A192F] font-semibold text-xs hover:gap-2.5 transition-all mt-auto w-fit">
-                        Lihat Detail <ArrowUpRight size={14} />
-                      </a>
+                      <Button
+                        variant="white"
+                        size="sm"
+                        shape="default"
+                        href={project.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        iconRight={<ArrowUpRight size={14} />}
+                        className="mt-auto w-full"
+                      >
+                        Lihat Live Project
+                      </Button>
                     )}
                   </div>
-                </div>
+                </Card>
               )
             })}
           </div>
