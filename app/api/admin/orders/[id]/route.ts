@@ -1,35 +1,36 @@
-import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
-
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { db, orders } from '@/db'
+import { eq } from 'drizzle-orm'
 
 // PATCH: update status order by id
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await params
-  const { status } = await request.json()
+  try {
+    const { id } = await params
+    const { status } = await request.json()
 
-  const validStatuses = ['Pending', 'DP', 'Dikerjakan', 'Lunas', 'Batal']
-  if (!validStatuses.includes(status)) {
-    return NextResponse.json({ error: 'Status tidak valid' }, { status: 400 })
+    const validStatuses = ['Pending', 'DP', 'Dikerjakan', 'Lunas', 'Batal']
+    if (!validStatuses.includes(status)) {
+      return NextResponse.json({ error: 'Status tidak valid' }, { status: 400 })
+    }
+
+    const [updated] = await db
+      .update(orders)
+      .set({ status })
+      .where(eq(orders.id, id))
+      .returning()
+
+    if (!updated) {
+      return NextResponse.json({ error: 'Order tidak ditemukan' }, { status: 404 })
+    }
+
+    return NextResponse.json({ data: updated })
+  } catch (error: any) {
+    console.error('Drizzle update order error:', error)
+    return NextResponse.json({ error: error.message || 'Gagal update order' }, { status: 500 })
   }
-
-  const { data, error } = await supabaseAdmin
-    .from('orders')
-    .update({ status })
-    .eq('id', id)
-    .select()
-    .single()
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
-  return NextResponse.json({ data })
 }
 
 // DELETE: hapus order
@@ -37,15 +38,21 @@ export async function DELETE(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await params
+  try {
+    const { id } = await params
 
-  const { error } = await supabaseAdmin
-    .from('orders')
-    .delete()
-    .eq('id', id)
+    const [deleted] = await db
+      .delete(orders)
+      .where(eq(orders.id, id))
+      .returning()
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    if (!deleted) {
+      return NextResponse.json({ error: 'Order tidak ditemukan' }, { status: 404 })
+    }
+
+    return NextResponse.json({ success: true, data: deleted })
+  } catch (error: any) {
+    console.error('Drizzle delete order error:', error)
+    return NextResponse.json({ error: error.message || 'Gagal menghapus order' }, { status: 500 })
   }
-  return NextResponse.json({ success: true })
 }

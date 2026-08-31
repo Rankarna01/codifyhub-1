@@ -1,38 +1,48 @@
-import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
-
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { db, settings } from '@/db'
+import { sql } from 'drizzle-orm'
 
 // GET all settings
 export async function GET() {
-  const { data, error } = await supabaseAdmin
-    .from('settings')
-    .select('key, value')
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  try {
+    const data = await db.select().from(settings)
+    // Ubah array [{key, value}] menjadi object {key: value}
+    const formatted = Object.fromEntries(data.map((s) => [s.key, s.value]))
+    return NextResponse.json({ data: formatted }, { status: 200 })
+  } catch (error: any) {
+    console.error('Drizzle get settings error:', error)
+    return NextResponse.json({ error: error.message || 'Gagal memuat setting' }, { status: 500 })
   }
-
-  // Ubah array [{key, value}] menjadi object {key: value}
-  const settings = Object.fromEntries(data.map((s: { key: string; value: string }) => [s.key, s.value]))
-  return NextResponse.json({ data: settings })
 }
 
 // POST: upsert settings
 export async function POST(request: Request) {
-  const body = await request.json() // { key: value, key2: value2, ... }
+  try {
+    const body = await request.json() // { key: value, key2: value2, ... }
+    const entries = Object.entries(body).map(([key, value]) => ({
+      key,
+      value: String(value ?? ''),
+      updated_at: new Date(),
+    }))
 
-  const upsertRows = Object.entries(body).map(([key, value]) => ({ key, value }))
+    if (entries.length === 0) {
+      return NextResponse.json({ success: true })
+    }
 
-  const { error } = await supabaseAdmin
-    .from('settings')
-    .upsert(upsertRows, { onConflict: 'key' })
+    await db
+      .insert(settings)
+      .values(entries)
+      .onConflictDoUpdate({
+        target: settings.key,
+        set: {
+          value: sql`excluded.value`,
+          updated_at: sql`excluded.updated_at`,
+        },
+      })
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ success: true }, { status: 200 })
+  } catch (error: any) {
+    console.error('Drizzle upsert settings error:', error)
+    return NextResponse.json({ error: error.message || 'Gagal menyimpan setting' }, { status: 500 })
   }
-  return NextResponse.json({ success: true })
 }

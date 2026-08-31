@@ -31,9 +31,22 @@ export default function ProjectsPage() {
 
   const fetchProjects = async () => {
     setLoading(true)
-    const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false })
-    setProjects(data ?? [])
-    setLoading(false)
+    try {
+      const res = await fetch('/api/projects')
+      const json = await res.json()
+      if (res.ok) {
+        setProjects(json.data ?? [])
+      } else {
+        // Fallback to Supabase client if direct DB not configured
+        const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false })
+        setProjects(data ?? [])
+      }
+    } catch {
+      const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false })
+      setProjects(data ?? [])
+    } finally {
+      setLoading(false)
+    }
   }
 
   const openAdd = () => { setForm(emptyForm); setEditId(null); setImageFile(null); setShowForm(true) }
@@ -67,25 +80,35 @@ export default function ProjectsPage() {
     }
 
     const payload = { ...form, image_url: uploadedUrl }
-    let err = null
     
-    if (editId) {
-      const { error } = await supabase.from('projects').update(payload).eq('id', editId)
-      err = error
-    } else {
-      const { error } = await supabase.from('projects').insert([payload])
-      err = error
+    try {
+      const url = editId ? `/api/projects/${editId}` : '/api/projects'
+      const method = editId ? 'PATCH' : 'POST'
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+
+      if (!res.ok) {
+        // Fallback to Supabase client
+        if (editId) {
+          const { error } = await supabase.from('projects').update(payload).eq('id', editId)
+          if (error) throw new Error(error.message)
+        } else {
+          const { error } = await supabase.from('projects').insert([payload])
+          if (error) throw new Error(error.message)
+        }
+      }
+
+      Toast.fire({ icon: 'success', title: editId ? 'Project diupdate!' : 'Project ditambahkan!' })
+      await fetchProjects()
+      closeForm()
+    } catch (err: any) {
+      Toast.fire({ icon: 'error', title: err.message || 'Gagal menyimpan data!' })
+    } finally {
+      setSaving(false)
     }
-    
-    setSaving(false)
-    if (err) {
-      Toast.fire({ icon: 'error', title: 'Gagal menyimpan data!' })
-      return
-    }
-    
-    Toast.fire({ icon: 'success', title: editId ? 'Project diupdate!' : 'Project ditambahkan!' })
-    await fetchProjects()
-    closeForm()
   }
 
   const handleDelete = async (id: string) => {
@@ -93,16 +116,19 @@ export default function ProjectsPage() {
     if (!isConfirmed) return
     
     setDeletingId(id)
-    const { error } = await supabase.from('projects').delete().eq('id', id)
-    setDeletingId(null)
-    
-    if (error) {
-      Toast.fire({ icon: 'error', title: 'Gagal menghapus project!' })
-      return
+    try {
+      const res = await fetch(`/api/projects/${id}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const { error } = await supabase.from('projects').delete().eq('id', id)
+        if (error) throw new Error(error.message)
+      }
+      Toast.fire({ icon: 'success', title: 'Project dihapus!' })
+      setProjects(prev => prev.filter(p => p.id !== id))
+    } catch (err: any) {
+      Toast.fire({ icon: 'error', title: err.message || 'Gagal menghapus project!' })
+    } finally {
+      setDeletingId(null)
     }
-    
-    Toast.fire({ icon: 'success', title: 'Project dihapus!' })
-    setProjects(prev => prev.filter(p => p.id !== id))
   }
 
   return (
