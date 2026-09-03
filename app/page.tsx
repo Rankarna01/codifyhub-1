@@ -2,6 +2,7 @@ import Navbar from '@/components/layout/Navbar'
 import Hero from '@/components/sections/Hero'
 import ClientsCarousel from '@/components/sections/ClientsCarousel'
 import WhatWeBuild from '@/components/sections/WhatWeBuild'
+import ShowcaseGrid from '@/components/sections/ShowcaseGrid'
 import Services from '@/components/sections/Services'
 import Portfolio from '@/components/sections/Portfolio'
 import Testimonials from '@/components/sections/Testimonials'
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <ClientsCarousel />
         <WhatWeBuild />
+        <ShowcaseGrid />
         <Services />
         <Portfolio />
         <Testimonials />
