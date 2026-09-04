@@ -149,7 +149,7 @@ export default function DashboardPage() {
               </div>
               <ArrowUpRight size={14} className="text-gray-300" />
             </div>
-            <p className="text-2xl font-bold text-gray-900 mb-0.5" style={{ fontFamily: 'Poppins, sans-serif' }}>
+            <p className="text-2xl font-bold text-gray-900 mb-0.5" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               {loading ? <span className="w-8 h-6 bg-gray-100 rounded animate-pulse inline-block" /> : card.value}
             </p>
             <p className="text-xs font-semibold text-gray-500">{card.label}</p>
@@ -186,7 +186,7 @@ export default function DashboardPage() {
             <DonutRing pct={conversionPct} color="#3B82F6" />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
-                <p className="text-xl font-bold text-gray-900" style={{ fontFamily: 'Poppins, sans-serif' }}>{conversionPct}%</p>
+                <p className="text-xl font-bold text-gray-900" style={{ fontFamily: 'Montserrat, sans-serif' }}>{conversionPct}%</p>
               </div>
             </div>
           </div>
