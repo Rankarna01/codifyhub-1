@@ -36,13 +36,13 @@ export const Badge: React.FC<BadgeProps> = ({
   className = '',
   variant = 'default',
   size = 'md',
-  hasShadow = true,
+  hasShadow = false,
   icon,
   ...props
 }) => {
   return (
     <span
-      className={`inline-flex items-center font-bold rounded-full border-2 ${variantStyles[variant]} ${sizeStyles[size]} ${
+      className={`inline-flex items-center font-bold rounded-full border ${variantStyles[variant]} ${sizeStyles[size]} ${
         hasShadow ? 'shadow-[2px_2px_0px_#000000]' : ''
       } ${className}`}
       {...props}

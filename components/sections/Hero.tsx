@@ -91,10 +91,10 @@ export default function Hero() {
               <div className="relative overflow-visible max-w-xl mx-auto lg:max-w-none">
                 
                 {/* Main Dark Terminal Window */}
-                <div className="border-2 border-black rounded-3xl bg-[#1E2235] text-white shadow-[8px_8px_0px_#000000] overflow-hidden min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] flex flex-col justify-between">
+                <div className="border border-black rounded-3xl bg-[#1E2235] text-white overflow-hidden min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] flex flex-col justify-between">
                   
                   {/* macOS Style Traffic Dots Header Bar */}
-                  <div className="bg-[#151824] px-5 py-3.5 border-b-2 border-black flex items-center justify-between">
+                  <div className="bg-[#151824] px-5 py-3.5 border-b border-black flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="w-3.5 h-3.5 rounded-full bg-[#FF5F56] border border-[#E0443E] inline-block shadow-sm" />
                       <span className="w-3.5 h-3.5 rounded-full bg-[#FFBD2E] border border-[#DEA123] inline-block shadow-sm" />
@@ -157,8 +157,8 @@ export default function Hero() {
 
           {/* Stats Bar Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card variant="white" interactive shadowSize="md" rounded="2xl" className="p-6 text-center">
-              <div className="w-12 h-12 bg-[#E8FBF0] border-2 border-black rounded-xl flex items-center justify-center mx-auto mb-3 shadow-[2px_2px_0px_#000]">
+            <Card variant="white" rounded="2xl" className="p-6 text-center">
+              <div className="w-12 h-12 bg-[#E8FBF0] border border-black rounded-2xl flex items-center justify-center mx-auto mb-3">
                 <Monitor size={22} className="text-black" />
               </div>
               <h4 className="text-3xl font-black text-gray-900 mb-1" style={{ fontFamily: 'var(--font-display)' }}>
@@ -169,8 +169,8 @@ export default function Hero() {
               </p>
             </Card>
 
-            <Card variant="accent" interactive shadowSize="md" rounded="2xl" className="p-6 text-center">
-              <div className="w-12 h-12 bg-white border-2 border-black rounded-xl flex items-center justify-center mx-auto mb-3 shadow-[2px_2px_0px_#000]">
+            <Card variant="accent" rounded="2xl" className="p-6 text-center">
+              <div className="w-12 h-12 bg-white border border-black rounded-2xl flex items-center justify-center mx-auto mb-3">
                 <Sparkles size={22} className="text-black" />
               </div>
               <h4 className="text-3xl font-black text-white mb-1" style={{ fontFamily: 'var(--font-display)' }}>
@@ -181,8 +181,8 @@ export default function Hero() {
               </p>
             </Card>
 
-            <Card variant="white" interactive shadowSize="md" rounded="2xl" className="p-6 text-center">
-              <div className="w-12 h-12 bg-[#EDE9FE] border-2 border-black rounded-xl flex items-center justify-center mx-auto mb-3 shadow-[2px_2px_0px_#000]">
+            <Card variant="white" rounded="2xl" className="p-6 text-center">
+              <div className="w-12 h-12 bg-[#EDE9FE] border border-black rounded-2xl flex items-center justify-center mx-auto mb-3">
                 <Store size={22} className="text-black" />
               </div>
               <h4 className="text-3xl font-black text-gray-900 mb-1" style={{ fontFamily: 'var(--font-display)' }}>

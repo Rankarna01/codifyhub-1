@@ -2,7 +2,22 @@
 
 import React from 'react'
 
-export type CardVariant = 'default' | 'white' | 'yellow' | 'accent' | 'blue' | 'mint' | 'dark' | 'navy' | 'coral' | 'purple' | 'slate'
+export type CardVariant =
+  | 'default'
+  | 'white'
+  | 'pastel-blue'
+  | 'pastel-yellow'
+  | 'pastel-mint'
+  | 'pastel-purple'
+  | 'yellow'
+  | 'accent'
+  | 'blue'
+  | 'mint'
+  | 'dark'
+  | 'navy'
+  | 'coral'
+  | 'purple'
+  | 'slate'
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: CardVariant
@@ -14,6 +29,10 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 const cardVariantStyles: Record<CardVariant, string> = {
   default: 'bg-white text-gray-900',
   white: 'bg-white text-gray-900',
+  'pastel-blue': 'bg-[#E8F1FD] text-gray-900',
+  'pastel-yellow': 'bg-[#FEF8D8] text-gray-900',
+  'pastel-mint': 'bg-[#EAFBF1] text-gray-900',
+  'pastel-purple': 'bg-[#F3E8FF] text-gray-900',
   yellow: 'bg-[#3B82F6] text-white',
   accent: 'bg-[#3B82F6] text-white',
   blue: 'bg-[#3B82F6] text-white',
@@ -25,18 +44,19 @@ const cardVariantStyles: Record<CardVariant, string> = {
   slate: 'bg-[#F8FAFC] text-gray-900'
 }
 
+// Flat modern styling: zero offset shadows
 const shadowStyles = {
   none: '',
-  sm: 'shadow-[2px_2px_0px_#000000]',
-  md: 'shadow-[4px_4px_0px_#000000]',
-  lg: 'shadow-[6px_6px_0px_#000000]'
+  sm: '',
+  md: '',
+  lg: ''
 }
 
 const roundedStyles = {
-  sm: 'rounded-lg',
-  md: 'rounded-xl',
-  lg: 'rounded-2xl',
-  xl: 'rounded-[20px]',
+  sm: 'rounded-xl',
+  md: 'rounded-2xl',
+  lg: 'rounded-[24px]',
+  xl: 'rounded-[28px]',
   '2xl': 'rounded-3xl',
   '3xl': 'rounded-[32px]'
 }
@@ -46,16 +66,14 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(({
   className = '',
   variant = 'default',
   interactive = false,
-  shadowSize = 'md',
+  shadowSize = 'none',
   rounded = '2xl',
   ...props
 }, ref) => {
   return (
     <div
       ref={ref}
-      className={`border-2 border-black relative overflow-hidden ${cardVariantStyles[variant]} ${shadowStyles[shadowSize]} ${roundedStyles[rounded]} ${
-        interactive ? 'hover:-translate-y-1 hover:shadow-[6px_6px_0px_#000000] active:translate-y-0 active:shadow-[2px_2px_0px_#000000] transition-all duration-200 cursor-pointer' : ''
-      } ${className}`}
+      className={`border border-black relative overflow-hidden ${cardVariantStyles[variant]} ${shadowStyles[shadowSize]} ${roundedStyles[rounded]} ${className}`}
       {...props}
     >
       {children}
@@ -70,7 +88,7 @@ export const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<
   ...props
 }, ref) => {
   return (
-    <div ref={ref} className={`p-6 pb-3 ${className}`} {...props}>
+    <div ref={ref} className={`p-6 pb-2 ${className}`} {...props}>
       {children}
     </div>
   )
@@ -83,7 +101,7 @@ export const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttribut
   ...props
 }, ref) => {
   return (
-    <h3 ref={ref} className={`text-xl font-bold tracking-tight ${className}`} {...props}>
+    <h3 ref={ref} className={`text-xl font-bold tracking-tight text-gray-900 ${className}`} {...props}>
       {children}
     </h3>
   )
@@ -96,7 +114,7 @@ export const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTML
   ...props
 }, ref) => {
   return (
-    <p ref={ref} className={`text-sm text-gray-600 mt-1.5 leading-relaxed ${className}`} {...props}>
+    <p ref={ref} className={`text-sm sm:text-[15px] text-gray-600 mt-1.5 leading-relaxed font-normal ${className}`} {...props}>
       {children}
     </p>
   )
@@ -133,4 +151,3 @@ export { TerminalCard } from './TerminalCard'
 export type { TerminalCardProps } from './TerminalCard'
 
 export default Card
-

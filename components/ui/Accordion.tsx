@@ -27,20 +27,20 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   }
 
   return (
-    <div className={`border-2 border-black rounded-2xl overflow-hidden shadow-[4px_4px_0px_#000000] mb-4 transition-all duration-200 ${bgColors[variant]}`}>
+    <div className={`border border-black rounded-2xl overflow-hidden mb-4 ${bgColors[variant]}`}>
       <button
         type="button"
         onClick={onToggle}
         className="w-full px-6 py-4.5 flex items-center justify-between text-left font-bold text-gray-900 hover:bg-black/5 transition cursor-pointer select-none"
       >
         <span className="text-base md:text-lg">{title}</span>
-        <div className={`w-8 h-8 rounded-full border-2 border-black bg-white flex items-center justify-center flex-shrink-0 ml-4 shadow-[2px_2px_0px_#000000] transition-transform duration-300 ${isOpen ? 'rotate-180 bg-[#3B82F6] text-white' : ''}`}>
+        <div className={`w-8 h-8 rounded-full border border-black bg-white flex items-center justify-center flex-shrink-0 ml-4 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-[#3B82F6] text-white' : ''}`}>
           <ChevronDown size={18} className={isOpen ? 'text-white' : 'text-black'} />
         </div>
       </button>
       
       {isOpen && (
-        <div className="px-6 pb-5 pt-1 text-sm md:text-base text-gray-700 leading-relaxed border-t-2 border-black/10">
+        <div className="px-6 pb-5 pt-1 text-sm md:text-base text-gray-700 leading-relaxed border-t border-black/10">
           {children}
         </div>
       )}

@@ -73,11 +73,11 @@ export function ProjectCardSkeleton({
     )
   }
 
-  // Landing page Neo-Brutalist skeleton
+  // Landing page modern skeleton matching Card
   return (
-    <div className="bg-white border-2 border-black rounded-2xl shadow-[4px_4px_0px_#000000] overflow-hidden flex flex-col pointer-events-none select-none">
+    <div className="bg-white border border-black rounded-[28px] overflow-hidden flex flex-col pointer-events-none select-none">
       {/* Preview Image skeleton */}
-      <div className="h-48 bg-gray-100 border-b-2 border-black relative overflow-hidden flex-shrink-0">
+      <div className="h-48 bg-gray-100 border-b border-black relative overflow-hidden flex-shrink-0">
         <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse" />
         {/* Floating badge skeleton */}
         <div className="absolute top-3 left-3">
@@ -98,9 +98,9 @@ export function ProjectCardSkeleton({
         </div>
 
         {/* Footer actions */}
-        <div className="pt-4 border-t-2 border-gray-100 flex items-center justify-between mt-auto">
+        <div className="pt-4 border-t border-gray-100 flex items-center justify-between mt-auto">
           <Skeleton className="h-4 w-28 bg-gray-200" rounded="md" />
-          <Skeleton className="h-9 w-9 bg-gray-300 border-2 border-black shadow-[2px_2px_0px_#000000]" rounded="xl" />
+          <Skeleton className="h-9 w-9 bg-gray-300 border border-black" rounded="xl" />
         </div>
       </div>
     </div>

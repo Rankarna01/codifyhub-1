@@ -45,7 +45,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonial" className="py-24 px-4 sm:px-6 bg-white border-t-2 border-black">
+    <section id="testimonial" className="py-24 px-4 sm:px-6 bg-white border-t border-black">
       <div className="max-w-7xl mx-auto">
         
         <div className="text-center mb-16">
@@ -65,9 +65,7 @@ export default function Testimonials() {
             <Card
               key={i}
               variant="white"
-              interactive
-              shadowSize="md"
-              rounded="2xl"
+              rounded="3xl"
               className="p-7 flex flex-col justify-between"
             >
               <div>
@@ -85,8 +83,8 @@ export default function Testimonials() {
                 </p>
               </div>
 
-              <div className="flex items-center gap-3 pt-4 border-t-2 border-black/10 mt-auto">
-                <div className="w-11 h-11 rounded-full border-2 border-black bg-[#3B82F6] flex items-center justify-center text-white font-black text-sm flex-shrink-0 shadow-[2px_2px_0px_#000]">
+              <div className="flex items-center gap-3 pt-4 border-t border-black/10 mt-auto">
+                <div className="w-11 h-11 rounded-full border border-black bg-[#3B82F6] flex items-center justify-center text-white font-black text-sm flex-shrink-0">
                   {t.avatar}
                 </div>
                 <div>

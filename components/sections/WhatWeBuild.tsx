@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { Card } from '@/components/ui'
 
 interface ServiceItem {
   id: string
@@ -38,7 +39,7 @@ const servicesList: ServiceItem[] = [
 
 export default function WhatWeBuild() {
   return (
-    <section id="what-we-build" className="py-16 lg:py-20 px-4 sm:px-6 bg-white border-t-2 border-black relative">
+    <section id="what-we-build" className="py-16 lg:py-20 px-4 sm:px-6 bg-white border-t border-black relative">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header - Clean & Direct */}
@@ -54,36 +55,38 @@ export default function WhatWeBuild() {
           </p>
         </div>
 
-        {/* 4 Compact Cards with Enlarged Assets */}
+        {/* 4 Compact Cards with clean modern aesthetic (no hover / no shadows) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {servicesList.map((service) => (
-            <div
+            <Card
               key={service.id}
-              className="group bg-white border-2 border-black rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_#000000] hover:shadow-[6px_6px_0px_#3B82F6] hover:-translate-y-1 hover:-translate-x-1 transition-all duration-200 flex flex-col justify-between"
+              variant="white"
+              rounded="2xl"
+              className="p-4 sm:p-5 flex flex-col justify-between"
             >
-              {/* Enlarged Visual Asset Container with tight height and zoomed image */}
-              <div className="w-full h-40 sm:h-44 bg-white rounded-xl mb-3 flex items-center justify-center overflow-hidden relative">
+              {/* Asset Container with border and soft rounded */}
+              <div className="w-full h-40 sm:h-44 bg-gray-50 border border-black/15 rounded-2xl mb-3.5 flex items-center justify-center overflow-hidden relative">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-contain scale-120 sm:scale-125 group-hover:scale-130 transition-transform duration-300 pointer-events-none select-none"
+                  className="w-full h-full object-contain scale-110 pointer-events-none select-none"
                 />
               </div>
 
               {/* Title & Short Description */}
               <div className="pt-1">
                 <h3
-                  className="text-base sm:text-lg font-black text-gray-900 mb-1.5 leading-snug group-hover:text-blue-600 transition-colors"
+                  className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 leading-snug"
                   style={{ fontFamily: 'var(--font-display)' }}
                 >
                   {service.title}
                 </h3>
 
-                <p className="text-gray-600 text-xs sm:text-[13px] font-medium leading-relaxed">
+                <p className="text-gray-600 text-xs sm:text-[13px] font-normal leading-relaxed">
                   {service.description}
                 </p>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
 

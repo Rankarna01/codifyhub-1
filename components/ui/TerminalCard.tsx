@@ -19,11 +19,11 @@ export const TerminalCard: React.FC<TerminalCardProps> = ({
 }) => {
   return (
     <div
-      className={`border-2 border-black rounded-2xl bg-[#1E2235] text-white shadow-[6px_6px_0px_#000000] overflow-hidden flex flex-col font-mono text-xs ${className}`}
+      className={`border border-black rounded-3xl bg-[#1E2235] text-white overflow-hidden flex flex-col font-mono text-xs ${className}`}
       {...props}
     >
       {/* Top Bar with traffic dots */}
-      <div className="bg-[#151824] px-4 py-2.5 border-b-2 border-black flex items-center justify-between">
+      <div className="bg-[#151824] px-4 py-2.5 border-b border-black flex items-center justify-between">
         {showTrafficDots ? (
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E] inline-block" />

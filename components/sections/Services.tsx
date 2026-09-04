@@ -41,7 +41,7 @@ export default function Services() {
   const currentCategory = servicesData.find(c => c.id === activeTab)
 
   return (
-    <section id="layanan" className="py-24 px-4 sm:px-6 bg-[#FFFDF7] border-y-2 border-black">
+    <section id="layanan" className="py-24 px-4 sm:px-6 bg-[#FFFDF7] border-y border-black">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}
@@ -76,12 +76,10 @@ export default function Services() {
                 <Card
                   key={idx}
                   variant="white"
-                  interactive
-                  shadowSize="md"
-                  rounded="xl"
+                  rounded="2xl"
                   className="p-5 text-center flex flex-col items-center justify-center min-h-[140px]"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] border-2 border-black flex items-center justify-center mb-3 shadow-[2px_2px_0px_#000]">
+                  <div className="w-12 h-12 rounded-2xl bg-[#EFF6FF] border border-black flex items-center justify-center mb-3">
                     <Icon size={24} className="text-blue-600" />
                   </div>
                   <h4 className="font-bold text-gray-900 text-sm mb-1">{item.title}</h4>
@@ -114,12 +112,11 @@ export default function Services() {
             <Card
               key={pkg.id}
               variant={pkg.isPopular ? 'accent' : 'white'}
-              shadowSize="lg"
-              rounded="2xl"
-              className={`flex flex-col relative ${pkg.isPopular ? 'ring-2 ring-black' : ''}`}
+              rounded="3xl"
+              className={`flex flex-col relative ${pkg.isPopular ? 'ring-1 ring-black' : ''}`}
             >
               {pkg.isPopular && (
-                <div className="bg-black text-white text-center text-xs font-black py-2 tracking-wider uppercase border-b-2 border-black flex items-center justify-center gap-1.5">
+                <div className="bg-black text-white text-center text-xs font-black py-2 tracking-wider uppercase border-b border-black flex items-center justify-center gap-1.5">
                   <Sparkles size={14} className="text-[#60A5FA]" />
                   <span>PALING POPULER & DIREKOMENDASIKAN</span>
                 </div>
@@ -136,7 +133,7 @@ export default function Services() {
                   {pkg.description}
                 </p>
 
-                <div className="mb-6 bg-white/95 p-4 rounded-xl border-2 border-black shadow-[2px_2px_0px_#000]">
+                <div className="mb-6 bg-white/95 p-4 rounded-2xl border border-black">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-gray-500 line-through text-xs font-bold">{pkg.originalPrice}</span>
                     <Badge variant="coral" size="sm" hasShadow={false} className="text-[10px]">
@@ -167,14 +164,14 @@ export default function Services() {
               </div>
 
               {/* Feature Checklist */}
-              <div className={`p-7 pt-4 flex-1 flex flex-col ${pkg.isPopular ? 'bg-blue-700/40 text-white' : 'bg-white/50 text-gray-800'} border-t-2 border-black mt-auto`}>
+              <div className={`p-7 pt-4 flex-1 flex flex-col ${pkg.isPopular ? 'bg-blue-700/40 text-white' : 'bg-white/50 text-gray-800'} border-t border-black mt-auto`}>
                 <p className={`text-xs font-black uppercase tracking-wider mb-4 ${pkg.isPopular ? 'text-white' : 'text-gray-900'}`}>
                   Layanan & Fitur yang Didapat:
                 </p>
                 <ul className="space-y-3">
                   {pkg.features.map((feature, j) => (
                     <li key={j} className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 rounded-md bg-[#55DE8F] border border-black flex items-center justify-center flex-shrink-0 mt-0.5 shadow-[1px_1px_0px_#000]">
+                      <div className="w-5 h-5 rounded-md bg-[#55DE8F] border border-black flex items-center justify-center flex-shrink-0 mt-0.5">
                         <CheckCircle2 size={12} className="text-black" />
                       </div>
                       <span className={`text-xs sm:text-sm font-semibold leading-tight ${pkg.isPopular ? 'text-blue-50' : 'text-gray-800'}`}>

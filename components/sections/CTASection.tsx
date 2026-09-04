@@ -10,7 +10,7 @@ export default function CTASection() {
 
   return (
     <>
-      <section id="pesan" className="py-24 px-4 sm:px-6 bg-[#0A192F] relative overflow-hidden border-t-2 border-black">
+      <section id="pesan" className="py-24 px-4 sm:px-6 bg-[#0A192F] relative overflow-hidden border-t border-black">
         {/* Subtle grid pattern */}
         <div
           className="absolute inset-0 z-0 pointer-events-none opacity-10"
@@ -23,9 +23,8 @@ export default function CTASection() {
         <div className="max-w-5xl mx-auto relative z-10">
           <Card
             variant="accent"
-            shadowSize="lg"
             rounded="3xl"
-            className="p-8 sm:p-14 text-center border-2 border-black relative overflow-hidden"
+            className="p-8 sm:p-14 text-center relative overflow-hidden"
           >
             {/* Background geometric accents */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none" />
@@ -73,7 +72,7 @@ export default function CTASection() {
               </div>
 
               {/* Stats Footer in CTA */}
-              <div className="grid grid-cols-3 gap-4 pt-8 border-t-2 border-black/20">
+              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-black/20">
                 {[
                   { value: '2.500+', label: 'Project Selesai' },
                   { value: '99.4%', label: 'Tingkat ACC & Lulus' },

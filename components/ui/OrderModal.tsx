@@ -92,11 +92,11 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" />
 
-      {/* Neo-Brutalist Modal Card */}
-      <div className="relative bg-white border-2 border-black rounded-3xl shadow-[8px_8px_0px_#000000] w-full max-w-4xl overflow-hidden flex flex-col md:flex-row transform transition-all z-10">
+      {/* Modal Card */}
+      <div className="relative bg-white border border-black rounded-3xl w-full max-w-4xl overflow-hidden flex flex-col md:flex-row transform transition-all z-10">
         
         {/* Left Column (Branding & Perks) */}
-        <div className="hidden md:flex flex-col justify-between w-5/12 bg-[#0A192F] text-white p-8 lg:p-10 relative overflow-hidden border-r-2 border-black">
+        <div className="hidden md:flex flex-col justify-between w-5/12 bg-[#0A192F] text-white p-8 lg:p-10 relative overflow-hidden border-r border-black">
           <div className="relative z-10">
             <Badge variant="accent" size="sm" className="mb-6">
               ✦ FAST RESPONSE 24/7
@@ -130,7 +130,7 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
         <div className="w-full md:w-7/12 p-6 sm:p-10 relative bg-[#FFFDF7]">
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 text-black p-2 bg-white hover:bg-gray-100 border-2 border-black shadow-[2px_2px_0px_#000] rounded-xl transition"
+            className="absolute top-5 right-5 text-black p-2 bg-white hover:bg-gray-100 border border-black rounded-xl transition"
             aria-label="Tutup modal"
           >
             <X size={18} />
@@ -150,12 +150,12 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
 
           {submitted ? (
             <div className="flex flex-col items-center justify-center py-12 gap-4">
-              <div className="w-16 h-16 bg-[#55DE8F] border-2 border-black rounded-2xl flex items-center justify-center shadow-[4px_4px_0px_#000]">
+              <div className="w-16 h-16 bg-[#55DE8F] border border-black rounded-2xl flex items-center justify-center">
                 <Check className="text-black" size={32} strokeWidth={3} />
               </div>
               <div className="text-center">
-                <p className="font-black text-gray-900 text-xl mb-1">Pesanan Tersimpan!</p>
-                <p className="text-gray-600 text-xs font-semibold">Membuka WhatsApp Admin...</p>
+                <h4 className="text-xl font-black text-gray-900 mb-1">Pemesanan Terkirim!</h4>
+                <p className="text-gray-600 text-sm">Membuka WhatsApp untuk menghubungkan dengan admin...</p>
               </div>
             </div>
           ) : (
@@ -167,7 +167,7 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
                     required
                     value={formData.name}
                     onChange={e => setFormData({...formData, name: e.target.value})}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none shadow-[2px_2px_0px_#000]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none"
                     placeholder="Contoh: Budi Santoso"
                   />
                 </div>
@@ -178,7 +178,7 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
                     required
                     value={formData.whatsapp}
                     onChange={e => setFormData({...formData, whatsapp: e.target.value})}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none shadow-[2px_2px_0px_#000]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none"
                     placeholder="08123456789"
                   />
                 </div>
@@ -190,7 +190,7 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
                   type="email"
                   value={formData.email}
                   onChange={e => setFormData({...formData, email: e.target.value})}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none shadow-[2px_2px_0px_#000]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none"
                   placeholder="budi@example.com"
                 />
               </div>
@@ -200,7 +200,7 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
                 <select
                   value={formData.service}
                   onChange={e => setFormData({...formData, service: e.target.value})}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-black text-sm font-bold focus:bg-[#FFF9E5] outline-none shadow-[2px_2px_0px_#000] cursor-pointer"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-black text-sm font-bold focus:bg-[#FFF9E5] outline-none cursor-pointer"
                 >
                   <option>Joki Tugas / Skripsi IT</option>
                   <option>Website & Toko Online UMKM</option>
@@ -216,7 +216,7 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
                   rows={3}
                   value={formData.details}
                   onChange={e => setFormData({...formData, details: e.target.value})}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none shadow-[2px_2px_0px_#000] resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-black text-sm font-medium focus:bg-[#FFF9E5] outline-none resize-none"
                   placeholder="Ceritakan fitur sistem, judul skripsi, atau deadline..."
                 />
               </div>
