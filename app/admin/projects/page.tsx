@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { Plus, Pencil, Trash2, ExternalLink, X, Save, Image, Loader2 } from 'lucide-react'
 import { Toast, confirmDelete } from '@/lib/swal'
+import { ProjectGridSkeleton } from '@/components/ui'
 
 interface Project {
   id: string
@@ -146,17 +147,7 @@ export default function ProjectsPage() {
 
       {/* Grid */}
       {loading ? (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-              <div className="h-44 bg-gray-100 animate-pulse" />
-              <div className="p-4 space-y-2">
-                <div className="h-4 bg-gray-100 rounded animate-pulse w-3/4" />
-                <div className="h-3 bg-gray-100 rounded animate-pulse w-1/2" />
-              </div>
-            </div>
-          ))}
-        </div>
+        <ProjectGridSkeleton count={6} mode="admin" />
       ) : projects.length === 0 ? (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm py-20 text-center">
           <FolderIcon />

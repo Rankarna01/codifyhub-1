@@ -5,7 +5,8 @@ import { config } from 'dotenv'
 
 config({ path: '.env.local' })
 
-const connectionString = process.env.DATABASE_URL
+const rawConnectionString = (process.env.DATABASE_URL || '').trim()
+const connectionString = rawConnectionString.replace(/^["']|["']$/g, '').trim()
 if (!connectionString) {
   console.error('❌ DATABASE_URL tidak ditemukan di .env.local')
   process.exit(1)

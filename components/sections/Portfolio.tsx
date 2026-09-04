@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { ArrowUpRight, Loader2, FolderGit2 } from 'lucide-react'
+import { ArrowUpRight, FolderGit2 } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
-import { Card, Badge, Button } from '@/components/ui'
+import { Card, Badge, Button, ProjectGridSkeleton } from '@/components/ui'
 
 interface Project {
   id: string
@@ -56,10 +56,7 @@ export default function Portfolio() {
         </div>
 
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-20">
-            <Loader2 className="animate-spin text-black mb-3" size={36} />
-            <p className="text-sm font-bold text-gray-700">Memuat portofolio...</p>
-          </div>
+          <ProjectGridSkeleton count={6} mode="landing" />
         ) : projects.length === 0 ? (
           <Card variant="slate" shadowSize="md" rounded="2xl" className="text-center py-16 px-6">
             <div className="w-14 h-14 bg-white rounded-xl border-2 border-black flex items-center justify-center mx-auto mb-4 shadow-[2px_2px_0px_#000]">

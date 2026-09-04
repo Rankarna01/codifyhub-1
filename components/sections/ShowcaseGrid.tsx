@@ -61,35 +61,14 @@ export default function ShowcaseGrid() {
               className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              Projects that{' '}
+              Explore Our{' '}
               <span className="text-[#3B82F6]">
-                speak for themselves
+                Featured Work
               </span>
             </h2>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <p className="text-gray-400 text-xs sm:text-sm font-normal leading-relaxed max-w-xs">
-              Selected work that shows what we do, how we think, and what it leads to.
-            </p>
-
-            {/* Navigation Arrows like the reference */}
-            <div className="hidden sm:flex items-center gap-2">
-              <button
-                type="button"
-                aria-label="Previous"
-                className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black border border-white/15 flex items-center justify-center transition-all duration-200 active:scale-95"
-              >
-                <ArrowLeft size={16} />
-              </button>
-              <button
-                type="button"
-                aria-label="Next"
-                className="w-9 h-9 rounded-xl bg-white hover:bg-white/90 text-black flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md"
-              >
-                <ArrowRight size={16} />
-              </button>
-            </div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
           </div>
         </div>
 

@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { db, settings } from '@/db'
 import { sql } from 'drizzle-orm'
 
+export const dynamic = 'force-dynamic'
+
 // GET all settings
 export async function GET() {
   try {

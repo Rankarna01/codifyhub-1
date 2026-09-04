@@ -2,7 +2,9 @@ import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
 import * as schema from './schema'
 
-const connectionString = process.env.DATABASE_URL || ''
+// Sanitasi DATABASE_URL: bersihkan spasi dan tanda kutip (" atau ') yang terbawa dari env variable
+const rawConnectionString = (process.env.DATABASE_URL || '').trim()
+const connectionString = rawConnectionString.replace(/^["']|["']$/g, '').trim()
 
 declare global {
   // eslint-disable-next-line no-var

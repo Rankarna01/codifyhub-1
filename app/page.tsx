@@ -19,8 +19,8 @@ export default function Home() {
         <ClientsCarousel />
         <WhatWeBuild />
         <ShowcaseGrid />
-        <Services />
         <Portfolio />
+        <Services />
         <Testimonials />
         <CTASection />
         <Footer />
