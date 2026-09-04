@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F4F6FA] flex items-center justify-center p-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
+    <div className="min-h-screen bg-[#F4F6FA] flex items-center justify-center p-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
       {/* BG decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0A192F] via-blue-600 to-[#0A192F]" />

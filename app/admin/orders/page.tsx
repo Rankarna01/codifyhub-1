@@ -125,7 +125,7 @@ export default function OrdersPage() {
               onClick={() => setFilterStatus(filterStatus === s ? 'Semua' : s)}
               className={`bg-white border rounded-2xl p-3 text-center hover:shadow-md transition-all ${filterStatus === s ? 'border-[#0A192F] shadow-sm' : 'border-gray-100'}`}
             >
-              <p className="text-xl font-bold text-gray-900" style={{ fontFamily: 'Poppins, sans-serif' }}>{counts[s] ?? 0}</p>
+              <p className="text-xl font-bold text-gray-900" style={{ fontFamily: 'Montserrat, sans-serif' }}>{counts[s] ?? 0}</p>
               <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${sc.color} border`}>{sc.label}</span>
             </button>
           )

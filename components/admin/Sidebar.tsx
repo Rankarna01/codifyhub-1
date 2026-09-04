@@ -50,7 +50,7 @@ export default function Sidebar({ isCollapsed, onToggle, isMobileOpen, onMobileC
         </div>
         {!isCollapsed && (
           <div>
-            <p className="text-white font-bold text-sm leading-none" style={{ fontFamily: 'Poppins, sans-serif' }}>CodifyHub</p>
+            <p className="text-white font-bold text-sm leading-none" style={{ fontFamily: 'Montserrat, sans-serif' }}>CodifyHub</p>
             <p className="text-white/30 text-[10px] mt-0.5">Admin Panel</p>
           </div>
         )}

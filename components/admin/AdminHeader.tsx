@@ -31,7 +31,7 @@ export default function AdminHeader({ onMobileMenuOpen }: AdminHeaderProps) {
 
       {/* Page title */}
       <div className="flex-1 min-w-0">
-        <h1 className="text-base font-bold text-gray-900 leading-none" style={{ fontFamily: 'Poppins, sans-serif' }}>
+        <h1 className="text-base font-bold text-gray-900 leading-none" style={{ fontFamily: 'Montserrat, sans-serif' }}>
           {page.title}
         </h1>
         <p className="text-xs text-gray-400 mt-0.5 hidden sm:block">{page.subtitle}</p>

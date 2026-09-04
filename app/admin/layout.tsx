@@ -49,7 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   // Loading screen
   if (checking) {
     return (
-      <div className="min-h-screen bg-[#F4F6FA] flex items-center justify-center" style={{ fontFamily: 'Poppins, sans-serif' }}>
+      <div className="min-h-screen bg-[#F4F6FA] flex items-center justify-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
         <div className="flex flex-col items-center gap-3">
           <Loader2 size={28} className="animate-spin text-[#0A192F]" />
           <p className="text-sm text-gray-500 font-medium">Memeriksa sesi...</p>
@@ -67,7 +67,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!authed) return null
 
   return (
-    <div className="min-h-screen bg-[#F4F6FA]" style={{ fontFamily: 'Poppins, sans-serif' }}>
+    <div className="min-h-screen bg-[#F4F6FA]" style={{ fontFamily: 'Montserrat, sans-serif' }}>
       <Sidebar
         isCollapsed={isCollapsed}
         onToggle={() => setIsCollapsed(!isCollapsed)}
