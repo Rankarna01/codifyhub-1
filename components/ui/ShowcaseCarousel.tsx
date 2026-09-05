@@ -93,11 +93,7 @@ export function ShowcaseCarousel({
   }, [autoScroll, isPaused, autoScrollSpeed])
 
   return (
-    <div
-      className={`w-full relative ${className}`}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <div className={`w-full relative ${className}`}>
       {/* Scrollable Track */}
       <div
         ref={scrollRef}

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Card } from '@/components/ui'
+import { Card, Carousel } from '@/components/ui'
 
 interface ServiceItem {
   id: string
@@ -50,19 +50,29 @@ export default function WhatWeBuild() {
           >
             What We Build
           </h2>
-          <p className="text-gray-600 text-sm sm:text-base font-medium leading-relaxed">
+          <p className="text-gray-600 text-sm sm:text-base font-normal leading-relaxed">
             High-performance digital products engineered for modern scaling businesses.
           </p>
         </div>
 
-        {/* 4 Compact Cards with clean modern aesthetic (no hover / no shadows) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Responsive Carousel: Desktop 4-column Grid, Mobile Smooth Carousel (never stops on cursor hover) */}
+        <Carousel
+          onlyMobile={true}
+          autoScroll={true}
+          autoScrollInterval={3500}
+          pauseOnHover={false}
+          desktopClassName="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          itemClassName="w-[82vw] max-w-[320px] shrink-0 snap-center px-1"
+          className="w-full"
+          showDots={true}
+          showArrows={true}
+        >
           {servicesList.map((service) => (
             <Card
               key={service.id}
               variant="white"
               rounded="2xl"
-              className="p-4 sm:p-5 flex flex-col justify-between"
+              className="p-4 sm:p-5 flex flex-col justify-between h-full"
             >
               {/* Asset Container with border and soft rounded */}
               <div className="w-full h-40 sm:h-44 bg-gray-50 border border-black/15 rounded-2xl mb-3.5 flex items-center justify-center overflow-hidden relative">
@@ -74,7 +84,7 @@ export default function WhatWeBuild() {
               </div>
 
               {/* Title & Short Description */}
-              <div className="pt-1">
+              <div className="pt-1 flex-1 flex flex-col">
                 <h3
                   className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 leading-snug"
                   style={{ fontFamily: 'var(--font-display)' }}
@@ -88,7 +98,7 @@ export default function WhatWeBuild() {
               </div>
             </Card>
           ))}
-        </div>
+        </Carousel>
 
       </div>
     </section>

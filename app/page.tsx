@@ -4,6 +4,7 @@ import ClientsCarousel from '@/components/sections/ClientsCarousel'
 import WhatWeBuild from '@/components/sections/WhatWeBuild'
 import ShowcaseGrid from '@/components/sections/ShowcaseGrid'
 import Services from '@/components/sections/Services'
+import TechnologySystems from '@/components/sections/TechnologySystems'
 import Portfolio from '@/components/sections/Portfolio'
 import Testimonials from '@/components/sections/Testimonials'
 import CTASection from '@/components/sections/CTASection'
@@ -21,6 +22,7 @@ export default function Home() {
         <ShowcaseGrid />
         <Portfolio />
         <Services />
+        <TechnologySystems />
         <Testimonials />
         <CTASection />
         <Footer />

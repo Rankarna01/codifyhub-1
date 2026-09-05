@@ -61,7 +61,7 @@ export default function Services() {
         </div>
 
         {/* Reference Image 3 Style: "Multiple Ways to Play / Berbagai Pilihan Solusi" */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <div className="text-center mb-6">
             <h3 className="text-xl sm:text-2xl font-black text-gray-900" style={{ fontFamily: 'var(--font-display)' }}>
               Berbagai Pilihan Solusi Digital
@@ -88,7 +88,7 @@ export default function Services() {
               )
             })}
           </div>
-        </div>
+        </div> */}
 
         {/* Category Filter Tabs */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
@@ -186,7 +186,7 @@ export default function Services() {
         </div>
 
         {/* Neo-Brutalist FAQ Accordion */}
-        <div className="max-w-3xl mx-auto pt-6">
+        {/* <div className="max-w-3xl mx-auto pt-6">
           <div className="text-center mb-8">
             <Badge variant="purple" size="md" className="mb-3">
               FAQ
@@ -197,7 +197,7 @@ export default function Services() {
           </div>
 
           <Accordion items={faqs} variant="white" />
-        </div>
+        </div> */}
 
       </div>
     </section>
