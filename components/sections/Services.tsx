@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { CheckCircle2, Terminal, Code, Cpu, Database, Globe, Wrench, Sparkles, ArrowRight } from 'lucide-react'
 import { servicesData } from '@/data/services'
-import { Button, Card, Badge, Accordion } from '@/components/ui'
+import { Button, Card, Badge, Accordion, SectionHeader } from '@/components/ui'
 
 const techSolutions = [
   { title: 'Web App', icon: Globe, desc: 'Next.js, React, Tailwind' },
@@ -44,21 +44,12 @@ export default function Services() {
     <section id="layanan" className="py-24 px-4 sm:px-6 bg-[#FFFDF7] border-y border-black">
       <div className="max-w-7xl mx-auto">
         
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge variant="accent" size="md" className="mb-4">
-            PILIHAN PAKET & LAYANAN
-          </Badge>
-          <h2
-            className="text-3xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-4"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            Layanan & Harga Spesial
-          </h2>
-          <p className="text-gray-700 max-w-xl mx-auto text-base sm:text-lg font-medium">
-            Pilih paket yang paling sesuai dengan kebutuhan Anda, dari Mahasiswa hingga Perusahaan.
-          </p>
-        </div>
+        {/* Section Header - Centered & Compact */}
+        <SectionHeader
+          badge={<Badge variant="accent" size="sm">PILIHAN PAKET &amp; LAYANAN</Badge>}
+          title="Layanan &amp; Harga Spesial"
+          description="Pilih paket yang paling sesuai dengan kebutuhan Anda, dari Mahasiswa hingga Perusahaan."
+        />
 
         {/* Reference Image 3 Style: "Multiple Ways to Play / Berbagai Pilihan Solusi" */}
         {/* <div className="mb-16">

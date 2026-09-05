@@ -10,12 +10,13 @@ export async function PATCH(
   try {
     const { id } = await params
     const body = await request.json()
-    const { title, description, image_url, client_name, link } = body
+    const { title, description, image_url, second_image_url, client_name, link } = body
 
     const updateData: Partial<typeof projects.$inferInsert> = {}
     if (title !== undefined) updateData.title = title
     if (description !== undefined) updateData.description = description
     if (image_url !== undefined) updateData.image_url = image_url
+    if (second_image_url !== undefined) updateData.second_image_url = second_image_url
     if (client_name !== undefined) updateData.client_name = client_name
     if (link !== undefined) updateData.link = link
 

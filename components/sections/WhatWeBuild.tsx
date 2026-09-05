@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Card, Carousel } from '@/components/ui'
+import { Card, Carousel, SectionHeader } from '@/components/ui'
 
 interface ServiceItem {
   id: string
@@ -42,18 +42,11 @@ export default function WhatWeBuild() {
     <section id="what-we-build" className="py-16 lg:py-20 px-4 sm:px-6 bg-white border-t border-black relative">
       <div className="max-w-7xl mx-auto">
         
-        {/* Section Header - Clean & Direct */}
-        <div className="text-center max-w-2xl mx-auto mb-10 lg:mb-12">
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-3 tracking-tight"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            What We Build
-          </h2>
-          <p className="text-gray-600 text-sm sm:text-base font-normal leading-relaxed">
-            High-performance digital products engineered for modern scaling businesses.
-          </p>
-        </div>
+        {/* Section Header - Centered & Compact */}
+        <SectionHeader
+          title="What We Build"
+          description="High-performance digital products engineered for modern scaling businesses."
+        />
 
         {/* Responsive Carousel: Desktop 4-column Grid, Mobile Smooth Carousel (never stops on cursor hover) */}
         <Carousel

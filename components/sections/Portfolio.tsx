@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from 'react'
 import { ArrowUpRight, LayoutGrid, SlidersHorizontal } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
-import { Badge, Button, ProjectGridSkeleton, Carousel } from '@/components/ui'
+import { Button, ProjectGridSkeleton, Carousel, SectionHeader, ImageScrollCard } from '@/components/ui'
 
 interface Project {
   id: string
   title: string
   description: string
   image_url: string
+  second_image_url?: string
   client_name: string
   link: string
   hasCloudBadge?: boolean
@@ -29,13 +30,13 @@ function ScallopDetailsBadge({ className = '' }: { className?: string }) {
   )
 }
 
-// Exact 4 projects from the user's reference image
+// Exact 4 projects with tall full-page website previews that scroll on hover
 const defaultProjects: Project[] = [
   {
     id: 'smartlearn',
     title: 'SmartLearn – AI Education App',
     description: 'An AI-powered learning app designed to make education interactive and engaging for students.',
-    image_url: '/features/assets2.png',
+    image_url: '/features/smartlearn-full.webp',
     client_name: 'AI Education',
     link: '#'
   },
@@ -43,7 +44,7 @@ const defaultProjects: Project[] = [
     id: 'florynce',
     title: 'Florynce - Skincare E-commerce Website',
     description: 'An elegant Shopify store designed to showcase skincare products and improve online shopping experience.',
-    image_url: '/features/assets.png',
+    image_url: '/features/florynce-full.webp',
     client_name: 'E-Commerce Store',
     link: '#'
   },
@@ -51,7 +52,7 @@ const defaultProjects: Project[] = [
     id: 'qortrade',
     title: 'QorTrade – Stock Management CRM',
     description: 'A powerful SaaS dashboard designed to simplify inventory tracking and business operations.',
-    image_url: '/features/assets3.png',
+    image_url: '/features/qortrade-full.webp',
     client_name: 'SaaS CRM',
     link: '#',
     hasCloudBadge: true
@@ -60,7 +61,7 @@ const defaultProjects: Project[] = [
     id: 'swiftbite',
     title: 'SwiftBite - Food Delivery App',
     description: 'A modern food ordering app designed for seamless browsing, ordering, and checkout.',
-    image_url: '/features/assets4.png',
+    image_url: '/features/swiftbite-full.webp',
     client_name: 'Food & Delivery',
     link: '#'
   }
@@ -81,45 +82,21 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, index, isCompact = false }: ProjectCardProps) {
-  const badgeVariants: ('accent' | 'mint' | 'blue' | 'coral' | 'purple')[] = ['accent', 'mint', 'blue', 'coral', 'purple']
-  const badgeVar = badgeVariants[index % badgeVariants.length]
   const bgClass = pastelBgs[index % pastelBgs.length]
   const showCloudBadge = project.hasCloudBadge || index === 2
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Top Mockup Frame with thin black border & rounded corners */}
-      <div
-        className={`w-full aspect-[4/3] sm:aspect-[16/11] ${
+    <div className="flex flex-col h-full group/card">
+      {/* Top Mockup Frame with ImageScrollCard (smooth full-page scroll to bottom on hover) */}
+      <ImageScrollCard
+        src={project.image_url}
+        alt={project.title}
+        bgClass={bgClass}
+        speed={220}
+        className={`aspect-[4/3] sm:aspect-[16/11] ${
           isCompact ? 'rounded-2xl sm:rounded-[28px] md:rounded-[32px]' : 'rounded-[28px] sm:rounded-[32px]'
-        } border border-black overflow-hidden relative flex items-center justify-center select-none ${bgClass}`}
+        } border border-black`}
       >
-        {project.image_url ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={project.image_url}
-            alt={project.title}
-            className="w-full h-full object-cover select-none pointer-events-none"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-gray-400 font-mono text-xs font-bold">
-            [Preview Unavailable]
-          </div>
-        )}
-
-        {/* Category / Client Pill Tag */}
-        {project.client_name && (
-          <div className={`absolute ${isCompact ? 'top-2.5 left-2.5 sm:top-4 sm:left-4' : 'top-4 left-4'} z-10`}>
-            <Badge
-              variant={badgeVar}
-              size="sm"
-              className={isCompact ? 'text-[10px] sm:text-xs py-0.5 px-2' : ''}
-            >
-              {project.client_name}
-            </Badge>
-          </div>
-        )}
-
         {/* Scalloped "See Details ↗" Sticker Badge */}
         {showCloudBadge && (
           <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
@@ -128,7 +105,7 @@ function ProjectCard({ project, index, isCompact = false }: ProjectCardProps) {
             </div>
           </div>
         )}
-      </div>
+      </ImageScrollCard>
 
       {/* Bottom Text Details directly under the frame without hover / shadow */}
       <div className={`${isCompact ? 'pt-2.5 sm:pt-4 md:pt-5' : 'pt-4 sm:pt-5'} flex-1 flex flex-col`}>
@@ -213,53 +190,42 @@ export default function Portfolio() {
   return (
     <section id="portofolio" className="py-20 sm:py-24 px-4 sm:px-6 bg-white border-t border-black">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header with Responsive Style Switcher */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-14 gap-6">
-          <div className="max-w-2xl">
-            <h2
-              className="text-3xl sm:text-5xl font-black text-gray-900 tracking-tight leading-tight"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              Selected Work &amp; Digital Systems
-            </h2>
-            <p className="text-gray-600 text-sm sm:text-base font-normal leading-relaxed mt-3 max-w-xl">
-              A showcase of production web applications, cross-platform mobile systems, and intelligent digital tools engineered for real-world impact.
-            </p>
-          </div>
-
+        {/* Section Header - Centered & Compact with Responsive View Switcher */}
+        <SectionHeader
+          title="Selected Work & Digital Systems"
+          description="A showcase of production web applications, cross-platform mobile systems, and intelligent digital tools engineered for real-world impact."
+        >
           {/* Responsive View Switcher: 2 Grid vs Carousel */}
-          <div className="flex items-center gap-2 self-start md:self-end shrink-0">
-            <div className="inline-flex items-center p-1 bg-gray-100 border border-black rounded-full select-none shadow-sm">
-              <button
-                type="button"
-                onClick={() => setViewMode('grid')}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
-                  viewMode === 'grid'
-                    ? 'bg-black text-white shadow-sm'
-                    : 'text-gray-600 hover:text-black hover:bg-white/60'
-                }`}
-                aria-label="Tampilan 2 Grid"
-              >
-                <LayoutGrid size={14} />
-                <span>2 Grid</span>
-              </button>
+          <div className="inline-flex items-center p-1 bg-gray-100 border border-black rounded-full select-none shadow-sm">
+            <button
+              type="button"
+              onClick={() => setViewMode('grid')}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
+                viewMode === 'grid'
+                  ? 'bg-black text-white shadow-sm'
+                  : 'text-gray-600 hover:text-black hover:bg-white/60'
+              }`}
+              aria-label="Tampilan 2 Grid"
+            >
+              <LayoutGrid size={14} />
+              <span>2 Grid</span>
+            </button>
 
-              <button
-                type="button"
-                onClick={() => setViewMode('carousel')}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
-                  viewMode === 'carousel'
-                    ? 'bg-black text-white shadow-sm'
-                    : 'text-gray-600 hover:text-black hover:bg-white/60'
-                }`}
-                aria-label="Tampilan Carousel"
-              >
-                <SlidersHorizontal size={14} />
-                <span>Carousel</span>
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => setViewMode('carousel')}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
+                viewMode === 'carousel'
+                  ? 'bg-black text-white shadow-sm'
+                  : 'text-gray-600 hover:text-black hover:bg-white/60'
+              }`}
+              aria-label="Tampilan Carousel"
+            >
+              <SlidersHorizontal size={14} />
+              <span>Carousel</span>
+            </button>
           </div>
-        </div>
+        </SectionHeader>
 
         {loading ? (
           <ProjectGridSkeleton count={4} mode="landing" />

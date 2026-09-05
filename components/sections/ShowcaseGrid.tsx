@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { SectionHeader } from '@/components/ui'
 
 export interface ShowcaseImage {
   id: string
@@ -49,44 +50,20 @@ export default function ShowcaseGrid() {
       <div className="absolute bottom-6 right-6 w-[350px] h-[200px] bg-purple-600/10 blur-[120px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header - Rapi & Sejajar Responsif */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 lg:mb-8 gap-4">
-          <div className="max-w-2xl">
-            <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
+        {/* Section Header - Centered & Compact (Dark Theme) */}
+        <SectionHeader
+          theme="dark"
+          align="center"
+          title={
+            <>
               Projects that{' '}
               <span className="text-[#3B82F6]">
                 speak for themselves
               </span>
-            </h2>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <p className="text-gray-400 text-xs sm:text-sm font-normal leading-relaxed max-w-xs">
-              Selected work that shows what we do, how we think, and what it leads to.
-            </p>
-
-            {/* Navigation Arrows */}
-            <div className="hidden sm:flex items-center gap-2">
-              <button
-                type="button"
-                aria-label="Previous"
-                className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white text-white hover:text-black border border-white/15 flex items-center justify-center transition-all duration-200 active:scale-95"
-              >
-                <ArrowLeft size={16} />
-              </button>
-              <button
-                type="button"
-                aria-label="Next"
-                className="w-9 h-9 rounded-xl bg-white hover:bg-white/90 text-black flex items-center justify-center transition-all duration-200 active:scale-95 shadow-md"
-              >
-                <ArrowRight size={16} />
-              </button>
-            </div>
-          </div>
-        </div>
+            </>
+          }
+          description="Selected work that shows what we do, how we think, and what it leads to."
+        />
 
         {/* 1. Desktop Mode: 2x2 Grid (Statis, clean border, no hover) */}
         <div className="hidden md:grid md:grid-cols-2 gap-3.5 sm:gap-4 lg:gap-5">
@@ -105,19 +82,19 @@ export default function ShowcaseGrid() {
           ))}
         </div>
 
-        {/* 2. Responsive / Mobile Mode: Marquee Bergerak Otomatis */}
+        {/* 2. Responsive / Mobile Mode: Marquee Bergerak Otomatis (Tidak Pernah Berhenti saat Kursor Mengarah) */}
         <div className="block md:hidden overflow-hidden w-full -mx-4 px-4 py-2">
-          <div className="flex gap-3.5 w-max marquee-track">
+          <div className="flex gap-3.5 w-max marquee-track [animation-play-state:running!important] hover:[animation-play-state:running!important]">
             {/* Duplikasi list gambar untuk continuous infinite loop */}
-            {[...showcaseImages, ...showcaseImages].map((item, idx) => (
+            {[...showcaseImages, ...showcaseImages, ...showcaseImages].map((item, idx) => (
               <div
                 key={`${item.id}-${idx}`}
-                className="w-[82vw] max-w-[340px] aspect-[4/3] shrink-0 rounded-2xl bg-[var(--dark-card)] border border-[var(--dark-card-border)] overflow-hidden relative flex items-center justify-center"
+                className="w-[76vw] sm:w-[320px] aspect-[4/3] shrink-0 rounded-2xl bg-[var(--dark-card)] border border-[var(--dark-card-border)] overflow-hidden relative flex items-center justify-center"
               >
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover select-none"
+                  className="w-full h-full object-cover select-none pointer-events-none"
                 />
               </div>
             ))}

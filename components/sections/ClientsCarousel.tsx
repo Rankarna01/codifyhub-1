@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { Card, Carousel } from '@/components/ui'
+import { Card, Carousel, SectionHeader } from '@/components/ui'
 
 interface ClientLogoItem {
   name: string
@@ -33,20 +33,11 @@ export default function ClientsCarousel() {
     <section className="py-20 lg:py-24 px-4 sm:px-6 bg-[#FAF8F5] border-t border-black relative overflow-hidden">
       <div className="max-w-5xl mx-auto relative z-10">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight leading-tight"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            Ekosistem Klien &amp; <br className="hidden sm:inline" />
-            Mitra Terpercaya
-          </h2>
-
-          <p className="text-gray-600 text-sm sm:text-base font-normal leading-relaxed max-w-2xl mx-auto">
-            Solusi sistem web, aplikasi kustom, dan otomasi digital yang telah terbukti menggerakkan<br className="hidden sm:inline" /> efisiensi bisnis dari instansi BUMN hingga korporasi swasta.
-          </p>
-        </div>
+        {/* Section Header - Centered & Compact */}
+        <SectionHeader
+          title="Ekosistem Klien & Mitra Terpercaya"
+          description="Solusi sistem web, aplikasi kustom, dan otomasi digital yang telah terbukti menggerakkan efisiensi bisnis dari instansi BUMN hingga korporasi swasta."
+        />
 
         {/* Responsive Carousel: Desktop 2-column Grid, Mobile Smooth Carousel (never stops on cursor hover) */}
         <Carousel

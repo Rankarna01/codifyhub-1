@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Star, Quote } from 'lucide-react'
-import { Card, Badge } from '@/components/ui'
+import { Card, Badge, SectionHeader } from '@/components/ui'
 
 const testimonials = [
   {
@@ -48,17 +48,12 @@ export default function Testimonials() {
     <section id="testimonial" className="py-24 px-4 sm:px-6 bg-white border-t border-black">
       <div className="max-w-7xl mx-auto">
         
-        <div className="text-center mb-16">
-          <Badge variant="accent" size="md" className="mb-3">
-            KATA MEREKA
-          </Badge>
-          <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-4" style={{ fontFamily: 'var(--font-display)' }}>
-            Testimoni & Pengalaman Klien
-          </h2>
-          <p className="text-gray-700 max-w-xl mx-auto text-base font-medium">
-            Kepercayaan dan kepuasan mahasiswa & pebisnis adalah prioritas utama kami.
-          </p>
-        </div>
+        {/* Section Header - Centered & Compact */}
+        <SectionHeader
+          badge={<Badge variant="accent" size="sm">KATA MEREKA</Badge>}
+          title="Testimoni &amp; Pengalaman Klien"
+          description="Kepercayaan dan kepuasan mahasiswa &amp; pebisnis adalah prioritas utama kami."
+        />
 
         <div className="grid md:grid-cols-2 gap-8">
           {testimonials.map((t, i) => (

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { MessageCircle, ArrowRight, Sparkles } from 'lucide-react'
-import { Button, Card, Badge } from '@/components/ui'
+import { Button, Card, Badge, SectionHeader } from '@/components/ui'
 import OrderModal from '@/components/ui/OrderModal'
 
 export default function CTASection() {
@@ -31,21 +31,15 @@ export default function CTASection() {
             <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#55DE8F]/30 rounded-full blur-2xl pointer-events-none" />
 
             <div className="max-w-3xl mx-auto relative z-10">
-              <Badge variant="navy" size="md" className="mb-6">
-                ✦ SIAP MEMULAI PROJECT ANDA?
-              </Badge>
-
-              <h2
-                className="text-3xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight"
-                style={{ fontFamily: 'var(--font-display)' }}
-              >
-                Wujudkan Skripsi & <br />
-                Sistem Impian Sekarang
-              </h2>
-
-              <p className="text-blue-100 text-base sm:text-lg mb-10 max-w-xl mx-auto font-medium leading-relaxed">
-                Konsultasikan ide Anda secara gratis tanpa komitmen. Tim kami siap membantu pengerjaan dari nol hingga selesai tuntas bergaransi.
-              </p>
+              {/* Header - Centered, Dark Theme & Compact */}
+              <SectionHeader
+                theme="dark"
+                badge={<Badge variant="navy" size="md">✦ SIAP MEMULAI PROJECT ANDA?</Badge>}
+                title={<>Wujudkan Skripsi &amp; Sistem Impian Sekarang</>}
+                description="Konsultasikan ide Anda secara gratis tanpa komitmen. Tim kami siap membantu pengerjaan dari nol hingga selesai tuntas bergaransi."
+                descriptionClassName="text-blue-100"
+                className="mb-8"
+              />
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
                 <Button

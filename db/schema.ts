@@ -19,6 +19,7 @@ export const projects = pgTable('projects', {
   title: text('title').notNull(),
   description: text('description').notNull(),
   image_url: text('image_url'),
+  second_image_url: text('second_image_url'),
   client_name: text('client_name'),
   link: text('link'),
   created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
