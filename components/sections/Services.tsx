@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { CheckCircle2, Terminal, Code, Cpu, Database, Globe, Wrench, Sparkles, ArrowRight } from 'lucide-react'
 import { servicesData } from '@/data/services'
-import { Button, Card, Badge, Accordion, SectionHeader } from '@/components/ui'
+import { Button, Card, Badge, Accordion, SectionHeader, GsapSection } from '@/components/ui'
 
 const techSolutions = [
   { title: 'Web App', icon: Globe, desc: 'Next.js, React, Tailwind' },
@@ -41,15 +41,17 @@ export default function Services() {
   const currentCategory = servicesData.find(c => c.id === activeTab)
 
   return (
-    <section id="layanan" className="py-24 px-4 sm:px-6 bg-[#FFFDF7] border-y border-black">
-      <div className="max-w-7xl mx-auto">
+    <GsapSection id="layanan" className="py-24 px-4 sm:px-6 bg-[#FFFDF7] border-y border-black">
+      <div className="max-w-7xl mx-auto gsap-section-content">
         
         {/* Section Header - Centered & Compact */}
-        <SectionHeader
-          badge={<Badge variant="accent" size="sm">PILIHAN PAKET &amp; LAYANAN</Badge>}
-          title="Layanan &amp; Harga Spesial"
-          description="Pilih paket yang paling sesuai dengan kebutuhan Anda, dari Mahasiswa hingga Perusahaan."
-        />
+        <div className="gsap-reveal">
+          <SectionHeader
+            badge={<Badge variant="accent" size="sm">PILIHAN PAKET &amp; LAYANAN</Badge>}
+            title="Layanan &amp; Harga Spesial"
+            description="Pilih paket yang paling sesuai dengan kebutuhan Anda, dari Mahasiswa hingga Perusahaan."
+          />
+        </div>
 
         {/* Reference Image 3 Style: "Multiple Ways to Play / Berbagai Pilihan Solusi" */}
         {/* <div className="mb-16">
@@ -82,7 +84,7 @@ export default function Services() {
         </div> */}
 
         {/* Category Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-3 mb-12 gsap-reveal">
           {servicesData.map(category => (
             <Button
               key={category.id}
@@ -98,7 +100,7 @@ export default function Services() {
         </div>
 
         {/* Pricing Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 gsap-reveal">
           {currentCategory?.packages.map((pkg) => (
             <Card
               key={pkg.id}
@@ -191,6 +193,6 @@ export default function Services() {
         </div> */}
 
       </div>
-    </section>
+    </GsapSection>
   )
 }

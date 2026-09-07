@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { SectionHeader } from '@/components/ui'
+import { SectionHeader, GsapSection } from '@/components/ui'
 
 export interface ShowcaseImage {
   id: string
@@ -41,7 +41,7 @@ export const showcaseImages: ShowcaseImage[] = [
 
 export default function ShowcaseGrid() {
   return (
-    <section
+    <GsapSection
       id="showcase-grid"
       className="py-12 lg:py-16 px-4 sm:px-6 bg-[var(--dark-bg)] text-white border-t border-black relative overflow-hidden"
     >
@@ -49,24 +49,26 @@ export default function ShowcaseGrid() {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-blue-600/10 blur-[130px] pointer-events-none rounded-full" />
       <div className="absolute bottom-6 right-6 w-[350px] h-[200px] bg-purple-600/10 blur-[120px] pointer-events-none rounded-full" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 gsap-section-content">
         {/* Section Header - Centered & Compact (Dark Theme) */}
-        <SectionHeader
-          theme="dark"
-          align="center"
-          title={
-            <>
-              Projects that{' '}
-              <span className="text-[#3B82F6]">
-                speak for themselves
-              </span>
-            </>
-          }
-          description="Selected work that shows what we do, how we think, and what it leads to."
-        />
+        <div className="gsap-reveal">
+          <SectionHeader
+            theme="dark"
+            align="center"
+            title={
+              <>
+                Projects that{' '}
+                <span className="text-[#3B82F6]">
+                  speak for themselves
+                </span>
+              </>
+            }
+            description="Selected work that shows what we do, how we think, and what it leads to."
+          />
+        </div>
 
         {/* 1. Desktop Mode: 2x2 Grid (Statis, clean border, no hover) */}
-        <div className="hidden md:grid md:grid-cols-2 gap-3.5 sm:gap-4 lg:gap-5">
+        <div className="hidden md:grid md:grid-cols-2 gap-3.5 sm:gap-4 lg:gap-5 gsap-reveal">
           {showcaseImages.map((item) => (
             <div
               key={item.id}
@@ -83,7 +85,7 @@ export default function ShowcaseGrid() {
         </div>
 
         {/* 2. Responsive / Mobile Mode: Marquee Bergerak Otomatis (Tidak Pernah Berhenti saat Kursor Mengarah) */}
-        <div className="block md:hidden overflow-hidden w-full -mx-4 px-4 py-2">
+        <div className="block md:hidden overflow-hidden w-full -mx-4 px-4 py-2 gsap-reveal">
           <div className="flex gap-3.5 w-max marquee-track [animation-play-state:running!important] hover:[animation-play-state:running!important]">
             {/* Duplikasi list gambar untuk continuous infinite loop */}
             {[...showcaseImages, ...showcaseImages, ...showcaseImages].map((item, idx) => (
@@ -101,6 +103,6 @@ export default function ShowcaseGrid() {
           </div>
         </div>
       </div>
-    </section>
+    </GsapSection>
   )
 }

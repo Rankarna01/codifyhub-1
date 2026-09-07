@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { MessageCircle, ArrowRight, Sparkles } from 'lucide-react'
-import { Button, Card, Badge, SectionHeader } from '@/components/ui'
+import { Button, Card, Badge, SectionHeader, GsapSection } from '@/components/ui'
 import OrderModal from '@/components/ui/OrderModal'
 
 export default function CTASection() {
@@ -10,7 +10,7 @@ export default function CTASection() {
 
   return (
     <>
-      <section id="pesan" className="py-24 px-4 sm:px-6 bg-[#0A192F] relative overflow-hidden border-t border-black">
+      <GsapSection id="pesan" className="py-24 px-4 sm:px-6 bg-[#0A192F] relative overflow-hidden border-t border-black">
         {/* Subtle grid pattern */}
         <div
           className="absolute inset-0 z-0 pointer-events-none opacity-10"
@@ -20,7 +20,7 @@ export default function CTASection() {
           }}
         />
 
-        <div className="max-w-5xl mx-auto relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10 gsap-section-content">
           <Card
             variant="accent"
             rounded="3xl"
@@ -32,16 +32,18 @@ export default function CTASection() {
 
             <div className="max-w-3xl mx-auto relative z-10">
               {/* Header - Centered, Dark Theme & Compact */}
-              <SectionHeader
-                theme="dark"
-                badge={<Badge variant="navy" size="md">✦ SIAP MEMULAI PROJECT ANDA?</Badge>}
-                title={<>Wujudkan Skripsi &amp; Sistem Impian Sekarang</>}
-                description="Konsultasikan ide Anda secara gratis tanpa komitmen. Tim kami siap membantu pengerjaan dari nol hingga selesai tuntas bergaransi."
-                descriptionClassName="text-blue-100"
-                className="mb-8"
-              />
+              <div className="gsap-reveal">
+                <SectionHeader
+                  theme="dark"
+                  badge={<Badge variant="navy" size="md">✦ SIAP MEMULAI PROJECT ANDA?</Badge>}
+                  title={<>Wujudkan Skripsi &amp; Sistem Impian Sekarang</>}
+                  description="Konsultasikan ide Anda secara gratis tanpa komitmen. Tim kami siap membantu pengerjaan dari nol hingga selesai tuntas bergaransi."
+                  descriptionClassName="text-blue-100"
+                  className="mb-8"
+                />
+              </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 gsap-reveal">
                 <Button
                   variant="primary"
                   size="xl"
@@ -66,7 +68,7 @@ export default function CTASection() {
               </div>
 
               {/* Stats Footer in CTA */}
-              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-black/20">
+              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-black/20 gsap-reveal">
                 {[
                   { value: '2.500+', label: 'Project Selesai' },
                   { value: '99.4%', label: 'Tingkat ACC & Lulus' },
@@ -83,7 +85,7 @@ export default function CTASection() {
             </div>
           </Card>
         </div>
-      </section>
+      </GsapSection>
 
       <OrderModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>

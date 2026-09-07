@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { ArrowUpRight, LayoutGrid, SlidersHorizontal } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
-import { Button, ProjectGridSkeleton, Carousel, SectionHeader, ImageScrollCard } from '@/components/ui'
+import { Button, ProjectGridSkeleton, Carousel, SectionHeader, ImageScrollCard, GsapSection } from '@/components/ui'
 
 interface Project {
   id: string
@@ -188,74 +188,78 @@ export default function Portfolio() {
   const displayProjects = projects.length > 0 ? projects : defaultProjects
 
   return (
-    <section id="portofolio" className="py-20 sm:py-24 px-4 sm:px-6 bg-white border-t border-black">
-      <div className="max-w-7xl mx-auto">
+    <GsapSection id="portofolio" className="py-20 sm:py-24 px-4 sm:px-6 bg-white border-t border-black">
+      <div className="max-w-7xl mx-auto gsap-section-content">
         {/* Section Header - Centered & Compact with Responsive View Switcher */}
-        <SectionHeader
-          title="Selected Work & Digital Systems"
-          description="A showcase of production web applications, cross-platform mobile systems, and intelligent digital tools engineered for real-world impact."
-        >
-          {/* Responsive View Switcher: 2 Grid vs Carousel */}
-          <div className="inline-flex items-center p-1 bg-gray-100 border border-black rounded-full select-none shadow-sm">
-            <button
-              type="button"
-              onClick={() => setViewMode('grid')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
-                viewMode === 'grid'
-                  ? 'bg-black text-white shadow-sm'
-                  : 'text-gray-600 hover:text-black hover:bg-white/60'
-              }`}
-              aria-label="Tampilan 2 Grid"
-            >
-              <LayoutGrid size={14} />
-              <span>2 Grid</span>
-            </button>
+        <div className="gsap-reveal">
+          <SectionHeader
+            title="Selected Work & Digital Systems"
+            description="A showcase of production web applications, cross-platform mobile systems, and intelligent digital tools engineered for real-world impact."
+          >
+            {/* Responsive View Switcher: 2 Grid vs Carousel */}
+            <div className="inline-flex items-center p-1 bg-gray-100 border border-black rounded-full select-none shadow-sm">
+              <button
+                type="button"
+                onClick={() => setViewMode('grid')}
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
+                  viewMode === 'grid'
+                    ? 'bg-black text-white shadow-sm'
+                    : 'text-gray-600 hover:text-black hover:bg-white/60'
+                }`}
+                aria-label="Tampilan 2 Grid"
+              >
+                <LayoutGrid size={14} />
+                <span>2 Grid</span>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => setViewMode('carousel')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
-                viewMode === 'carousel'
-                  ? 'bg-black text-white shadow-sm'
-                  : 'text-gray-600 hover:text-black hover:bg-white/60'
-              }`}
-              aria-label="Tampilan Carousel"
-            >
-              <SlidersHorizontal size={14} />
-              <span>Carousel</span>
-            </button>
-          </div>
-        </SectionHeader>
+              <button
+                type="button"
+                onClick={() => setViewMode('carousel')}
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-full transition-all cursor-pointer ${
+                  viewMode === 'carousel'
+                    ? 'bg-black text-white shadow-sm'
+                    : 'text-gray-600 hover:text-black hover:bg-white/60'
+                }`}
+                aria-label="Tampilan Carousel"
+              >
+                <SlidersHorizontal size={14} />
+                <span>Carousel</span>
+              </button>
+            </div>
+          </SectionHeader>
+        </div>
 
-        {loading ? (
-          <ProjectGridSkeleton count={4} mode="landing" />
-        ) : viewMode === 'grid' ? (
-          /* 2 GRID STYLE (Responsive 2-column layout on mobile, tablet & desktop) */
-          <div className="grid grid-cols-2 gap-3.5 sm:gap-6 md:gap-8 lg:gap-12 animate-in fade-in duration-300">
-            {displayProjects.map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} isCompact={true} />
-            ))}
-          </div>
-        ) : (
-          /* CAROUSEL STYLE (Continuous auto-scroll, smooth snap swipe, never stops on cursor) */
-          <div className="animate-in fade-in duration-300">
-            <Carousel
-              onlyMobile={false}
-              autoScroll={true}
-              autoScrollInterval={3500}
-              pauseOnHover={false}
-              itemClassName="w-[85vw] sm:w-[calc(50%-12px)] md:w-[480px] lg:w-[580px] shrink-0 snap-center px-1"
-              className="w-full"
-              showDots={true}
-              showArrows={true}
-            >
+        <div className="gsap-reveal">
+          {loading ? (
+            <ProjectGridSkeleton count={4} mode="landing" />
+          ) : viewMode === 'grid' ? (
+            /* 2 GRID STYLE (Responsive 2-column layout on mobile, tablet & desktop) */
+            <div className="grid grid-cols-2 gap-3.5 sm:gap-6 md:gap-8 lg:gap-12 animate-in fade-in duration-300">
               {displayProjects.map((project, i) => (
-                <ProjectCard key={project.id} project={project} index={i} isCompact={false} />
+                <ProjectCard key={project.id} project={project} index={i} isCompact={true} />
               ))}
-            </Carousel>
-          </div>
-        )}
+            </div>
+          ) : (
+            /* CAROUSEL STYLE (Continuous auto-scroll, smooth snap swipe, never stops on cursor) */
+            <div className="animate-in fade-in duration-300">
+              <Carousel
+                onlyMobile={false}
+                autoScroll={true}
+                autoScrollInterval={3500}
+                pauseOnHover={false}
+                itemClassName="w-[85vw] sm:w-[calc(50%-12px)] md:w-[480px] lg:w-[580px] shrink-0 snap-center px-1"
+                className="w-full"
+                showDots={true}
+                showArrows={true}
+              >
+                {displayProjects.map((project, i) => (
+                  <ProjectCard key={project.id} project={project} index={i} isCompact={false} />
+                ))}
+              </Carousel>
+            </div>
+          )}
+        </div>
       </div>
-    </section>
+    </GsapSection>
   )
 }

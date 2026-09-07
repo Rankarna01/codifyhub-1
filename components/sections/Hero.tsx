@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { ArrowRight, CheckCircle2, Monitor, Store, Sparkles, Check, Bot } from 'lucide-react'
-import { Button, Card, Badge, HeroVector } from '@/components/ui'
+import { Button, Card, Badge, HeroVector, GsapSection } from '@/components/ui'
 import OrderModal from '@/components/ui/OrderModal'
 
 export default function Hero() {
@@ -10,7 +10,7 @@ export default function Hero() {
 
   return (
     <>
-      <section className="pt-28 pb-16 px-4 sm:px-6 lg:pt-36 lg:pb-20 overflow-hidden relative bg-white">
+      <GsapSection isHero className="pt-28 pb-16 px-4 sm:px-6 lg:pt-36 lg:pb-20 overflow-hidden relative bg-white">
         {/* Subtle Neo Grid Pattern Background */}
         <div
           className="absolute inset-0 z-0 pointer-events-none opacity-40"
@@ -20,7 +20,7 @@ export default function Hero() {
           }}
         />
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto relative z-10 gsap-hero-content">
           {/* Main Hero Row */}
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-16">
             
@@ -28,7 +28,7 @@ export default function Hero() {
             <div className="lg:col-span-6 text-left">
               {/* Main Heading (SEO & Punchy Display Font) */}
               <h1
-                className="text-4xl sm:text-6xl lg:text-[62px] font-black tracking-tight text-gray-900 mb-6 leading-[1.05]"
+                className="text-4xl sm:text-6xl lg:text-[62px] font-black tracking-tight text-gray-900 mb-6 leading-[1.05] gsap-hero-title"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 Custom Web, <br />
@@ -39,12 +39,12 @@ export default function Hero() {
               </h1>
 
               {/* Body Text in Montserrat - SEO optimized keywords */}
-              <p className="text-base sm:text-lg text-gray-700 max-w-lg mb-8 leading-relaxed font-medium">
+              <p className="text-base sm:text-lg text-gray-700 max-w-lg mb-8 leading-relaxed font-medium gsap-hero-desc">
                 CodifyHub engineers high-performance <strong>custom web applications</strong>, <strong>mobile apps</strong>, <strong>enterprise business systems</strong>, and <strong>AI agent & live chat integrations</strong> tailored to scale your digital presence.
               </p>
 
               {/* Neo Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 mb-6">
+              <div className="flex flex-wrap items-center gap-4 mb-6 gsap-hero-action">
                 <Button
                   variant="primary"
                   size="lg"
@@ -69,15 +69,15 @@ export default function Hero() {
 
               {/* Trust checklist */}
               <div className="flex flex-wrap items-center gap-y-2 gap-x-5 text-xs sm:text-sm font-bold text-gray-800">
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1.5 gsap-hero-check">
                   <CheckCircle2 size={16} className="text-black fill-[#55DE8F]" />
                   <span>Production-Ready Clean Code</span>
                 </div>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1.5 gsap-hero-check">
                   <CheckCircle2 size={16} className="text-black fill-[#55DE8F]" />
                   <span>Custom AI & Chatbot Integration</span>
                 </div>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1.5 gsap-hero-check">
                   <CheckCircle2 size={16} className="text-black fill-[#55DE8F]" />
                   <span>100% Guaranteed On-Time Delivery</span>
                 </div>
@@ -91,7 +91,7 @@ export default function Hero() {
               <div className="relative overflow-visible max-w-xl mx-auto lg:max-w-none">
                 
                 {/* Main Dark Terminal Window */}
-                <div className="border border-black rounded-3xl bg-[#1E2235] text-white overflow-hidden min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] flex flex-col justify-between">
+                <div className="border border-black rounded-3xl bg-[#1E2235] text-white overflow-hidden min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] flex flex-col justify-between gsap-hero-terminal">
                   
                   {/* macOS Style Traffic Dots Header Bar */}
                   <div className="bg-[#151824] px-5 py-3.5 border-b border-black flex items-center justify-between">
@@ -145,7 +145,7 @@ export default function Hero() {
                 </div>
 
                 {/* Character Mascot Big Size Pinned to Bottom-Right Corner */}
-                <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 md:-bottom-8 md:-right-8 lg:-bottom-24 lg:-right-48 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[720px] lg:h-[420px] pointer-events-none z-20 flex items-end justify-end overflow-visible">
+                <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 md:-bottom-8 md:-right-8 lg:-bottom-24 lg:-right-48 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[720px] lg:h-[420px] pointer-events-none z-20 flex items-end justify-end overflow-visible gsap-hero-mascot">
                   <HeroVector className="w-full h-full" />
                 </div>
 
@@ -157,7 +157,7 @@ export default function Hero() {
 
           {/* Stats Bar Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card variant="white" rounded="2xl" className="p-6 text-center">
+            <Card variant="white" rounded="2xl" className="p-6 text-center gsap-hero-stat">
               <div className="w-12 h-12 bg-[#E8FBF0] border border-black rounded-2xl flex items-center justify-center mx-auto mb-3">
                 <Monitor size={22} className="text-black" />
               </div>
@@ -169,7 +169,7 @@ export default function Hero() {
               </p>
             </Card>
 
-            <Card variant="accent" rounded="2xl" className="p-6 text-center">
+            <Card variant="accent" rounded="2xl" className="p-6 text-center gsap-hero-stat">
               <div className="w-12 h-12 bg-white border border-black rounded-2xl flex items-center justify-center mx-auto mb-3">
                 <Sparkles size={22} className="text-black" />
               </div>
@@ -181,7 +181,7 @@ export default function Hero() {
               </p>
             </Card>
 
-            <Card variant="white" rounded="2xl" className="p-6 text-center">
+            <Card variant="white" rounded="2xl" className="p-6 text-center gsap-hero-stat">
               <div className="w-12 h-12 bg-[#EDE9FE] border border-black rounded-2xl flex items-center justify-center mx-auto mb-3">
                 <Store size={22} className="text-black" />
               </div>
@@ -195,7 +195,7 @@ export default function Hero() {
           </div>
 
         </div>
-      </section>
+      </GsapSection>
 
       <OrderModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>

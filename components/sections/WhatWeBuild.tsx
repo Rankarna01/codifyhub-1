@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Card, Carousel, SectionHeader } from '@/components/ui'
+import { Card, Carousel, SectionHeader, GsapSection } from '@/components/ui'
 
 interface ServiceItem {
   id: string
@@ -39,27 +39,30 @@ const servicesList: ServiceItem[] = [
 
 export default function WhatWeBuild() {
   return (
-    <section id="what-we-build" className="py-16 lg:py-20 px-4 sm:px-6 bg-white border-t border-black relative">
-      <div className="max-w-7xl mx-auto">
+    <GsapSection id="what-we-build" className="py-16 lg:py-20 px-4 sm:px-6 bg-white border-t border-black relative">
+      <div className="max-w-7xl mx-auto gsap-section-content">
         
         {/* Section Header - Centered & Compact */}
-        <SectionHeader
-          title="What We Build"
-          description="High-performance digital products engineered for modern scaling businesses."
-        />
+        <div className="gsap-reveal">
+          <SectionHeader
+            title="What We Build"
+            description="High-performance digital products engineered for modern scaling businesses."
+          />
+        </div>
 
         {/* Responsive Carousel: Desktop 4-column Grid, Mobile Smooth Carousel (never stops on cursor hover) */}
-        <Carousel
-          onlyMobile={true}
-          autoScroll={true}
-          autoScrollInterval={3500}
-          pauseOnHover={false}
-          desktopClassName="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5"
-          itemClassName="w-[82vw] max-w-[320px] shrink-0 snap-center px-1"
-          className="w-full"
-          showDots={true}
-          showArrows={true}
-        >
+        <div className="gsap-reveal">
+          <Carousel
+            onlyMobile={true}
+            autoScroll={true}
+            autoScrollInterval={3500}
+            pauseOnHover={false}
+            desktopClassName="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5"
+            itemClassName="w-[82vw] max-w-[320px] shrink-0 snap-center px-1"
+            className="w-full"
+            showDots={true}
+            showArrows={true}
+          >
           {servicesList.map((service) => (
             <Card
               key={service.id}
@@ -91,9 +94,10 @@ export default function WhatWeBuild() {
               </div>
             </Card>
           ))}
-        </Carousel>
+          </Carousel>
+        </div>
 
       </div>
-    </section>
+    </GsapSection>
   )
 }

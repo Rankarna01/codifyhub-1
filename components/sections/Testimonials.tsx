@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Star, Quote } from 'lucide-react'
-import { Card, Badge, SectionHeader } from '@/components/ui'
+import { Card, Badge, SectionHeader, GsapSection } from '@/components/ui'
 
 const testimonials = [
   {
@@ -45,17 +45,19 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonial" className="py-24 px-4 sm:px-6 bg-white border-t border-black">
-      <div className="max-w-7xl mx-auto">
+    <GsapSection id="testimonial" className="py-24 px-4 sm:px-6 bg-white border-t border-black">
+      <div className="max-w-7xl mx-auto gsap-section-content">
         
         {/* Section Header - Centered & Compact */}
-        <SectionHeader
-          badge={<Badge variant="accent" size="sm">KATA MEREKA</Badge>}
-          title="Testimoni &amp; Pengalaman Klien"
-          description="Kepercayaan dan kepuasan mahasiswa &amp; pebisnis adalah prioritas utama kami."
-        />
+        <div className="gsap-reveal">
+          <SectionHeader
+            badge={<Badge variant="accent" size="sm">KATA MEREKA</Badge>}
+            title="Testimoni &amp; Pengalaman Klien"
+            description="Kepercayaan dan kepuasan mahasiswa &amp; pebisnis adalah prioritas utama kami."
+          />
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 gsap-reveal">
           {testimonials.map((t, i) => (
             <Card
               key={i}
@@ -92,6 +94,6 @@ export default function Testimonials() {
         </div>
 
       </div>
-    </section>
+    </GsapSection>
   )
 }
