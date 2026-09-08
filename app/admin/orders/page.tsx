@@ -1,5 +1,7 @@
 'use client'
 
+import type { LucideIcon } from 'lucide-react'
+
 import { useEffect, useState, useCallback } from 'react'
 import { Clock, Circle, AlertCircle, CheckCircle2, Ban, Phone, Mail, Search, Filter, ChevronDown, RefreshCw, Trash2, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Toast, confirmDelete } from '@/lib/swal'
@@ -17,7 +19,7 @@ interface Order {
   created_at: string
 }
 
-const statusConfig: Record<OrderStatus, { label: string; color: string; dot: string; icon: React.ElementType }> = {
+const statusConfig: Record<OrderStatus, { label: string; color: string; dot: string; icon: LucideIcon }> = {
   Pending:    { label: 'Pending',    color: 'bg-amber-100 text-amber-700 border-amber-200',    dot: 'bg-amber-400',    icon: Clock },
   DP:         { label: 'DP Masuk',   color: 'bg-blue-100 text-blue-700 border-blue-200',       dot: 'bg-blue-400',     icon: Circle },
   Dikerjakan: { label: 'Dikerjakan', color: 'bg-violet-100 text-violet-700 border-violet-200', dot: 'bg-violet-400',   icon: AlertCircle },
