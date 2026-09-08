@@ -1,5 +1,6 @@
 import Navbar from '@/components/layout/Navbar'
 import Hero from '@/components/sections/Hero'
+import MiniStudio from '@/components/sections/MiniStudio'
 import ClientsCarousel from '@/components/sections/ClientsCarousel'
 import WhatWeBuild from '@/components/sections/WhatWeBuild'
 import ShowcaseGrid from '@/components/sections/ShowcaseGrid'
@@ -17,6 +18,7 @@ export default function Home() {
       <main className="flex-1 flex flex-col min-h-screen bg-white">
         <Navbar />
         <Hero />
+        <MiniStudio />
         <ClientsCarousel />
         <WhatWeBuild />
         <ShowcaseGrid />
