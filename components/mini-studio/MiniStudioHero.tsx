@@ -2,6 +2,10 @@
 
 import { Component, lazy, Suspense, useCallback, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { ArrowUpRight, Code2, Cookie, Hand, MonitorCheck, Moon, MousePointer2, Move3D, Pause, Play, RotateCcw, Minus, Plus } from 'lucide-react'
+import '@fontsource/poppins/latin-400.css'
+import '@fontsource/poppins/latin-500.css'
+import '@fontsource/poppins/latin-600.css'
+import '@fontsource/poppins/latin-700.css'
 import { ACTIVITIES, ACTIVITY_ORDER, FURNITURE, MASCOT_ASSET } from './config'
 import { StudioMachine } from './machine'
 import type { Activity, FurnitureId, SceneMode } from './types'
@@ -134,6 +138,7 @@ export default function MiniStudioHero({ placement = 'hero', onConsult, consulta
           <p id="studio-instructions">{failed ? 'Kamu tetap bisa konsultasi dan melihat portofolio.' : hint}</p>
           <label><input type="checkbox" checked={reduced} disabled={systemReduced} onChange={event => setUserReduced(event.target.checked)} />Gerak tenang{systemReduced ? ' (sistem)' : ''}</label>
         </div>
+        {!MASCOT_ASSET.url && <details className={styles.modelNote}><summary>Model maskot sementara</summary><p>Model 3D sederhana mengikuti referensi CodifyHub. Bentuk dan material dapat disempurnakan dengan model GLB asli; gambar referensi 2D bukan model 3D siap animasi.</p></details>}
       </div>
     </div>
   </section>

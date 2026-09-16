@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import type { LucideIcon } from 'lucide-react'
 import {
   ShoppingBag, FolderKanban, Users, TrendingUp,
   Clock, CheckCircle2, Circle, AlertCircle, ArrowUpRight
@@ -24,7 +25,7 @@ interface RecentOrder {
   whatsapp: string
 }
 
-const statusConfig: Record<string, { label: string; color: string; icon: React.ElementType }> = {
+const statusConfig: Record<string, { label: string; color: string; icon: LucideIcon }> = {
   Pending:   { label: 'Pending',   color: 'bg-amber-100 text-amber-700',   icon: Clock },
   DP:        { label: 'DP Masuk',  color: 'bg-blue-100 text-blue-700',     icon: Circle },
   Dikerjakan:{ label: 'Dikerjakan',color: 'bg-violet-100 text-violet-700', icon: AlertCircle },

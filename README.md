@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## CodifyHub Mini Studio
+
+Section 3D interaktif ditambahkan tepat di bawah hero lama tanpa menggantikannya. Website Next.js dan demo Vite memakai komponen Mini Studio yang sama.
+
+```bash
+npm ci
+npm run studio:dev
+```
+
+Panduan instalasi, struktur komponen, kontrol, penggantian model GLB, dan validasi tersedia di [docs/mini-studio.md](docs/mini-studio.md).
+
 ## Getting Started
 
 First, run the development server:

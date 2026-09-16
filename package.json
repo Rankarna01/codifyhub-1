@@ -11,9 +11,16 @@
     "db:migrate": "bun db/migrate.ts",
     "db:seed": "bun db/seed.ts",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "studio:dev": "vite --config vite.studio.config.ts",
+    "studio:build": "tsc -p tsconfig.studio.json && vite build --config vite.studio.config.ts",
+    "studio:preview": "vite preview --config vite.studio.config.ts",
+    "studio:test": "node --import tsx --test components/mini-studio/tests/*.test.ts"
   },
   "dependencies": {
+    "@fontsource/poppins": "^5.3.0",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
     "@supabase/ssr": "^0.12.0",
     "@supabase/supabase-js": "^2.110.0",
     "drizzle-orm": "^0.45.2",
@@ -24,18 +31,23 @@
     "postgres": "^3.4.9",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "sweetalert2": "^11.26.25"
+    "sweetalert2": "^11.26.25",
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.180.0",
+    "@vitejs/plugin-react": "^5.2.0",
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "^4.23.13",
+    "typescript": "^5",
+    "vite": "^7.3.6"
   }
 }

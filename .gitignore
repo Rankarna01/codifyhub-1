@@ -19,6 +19,7 @@
 
 # production
 /build
+/dist-studio/
 
 # misc
 .DS_Store
