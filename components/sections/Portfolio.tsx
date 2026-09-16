@@ -16,19 +16,6 @@ interface Project {
   hasCloudBadge?: boolean
 }
 
-// Scalloped / Cloud "See Details" Sticker matching Card 3 in reference image
-function ScallopDetailsBadge({ className = '' }: { className?: string }) {
-  return (
-    <div className={`relative inline-flex items-center justify-center select-none pointer-events-none drop-shadow-sm ${className}`}>
-      <svg viewBox="0 0 160 76" className="w-28 sm:w-36 h-14 sm:h-18 fill-white stroke-black stroke-[1.8] overflow-visible">
-        <path d="M 28 40 C 24 32 26 21 36 16 C 46 11 58 15 63 14 C 68 10 78 7 90 8 C 102 9 110 15 116 15 C 124 13 134 17 137 26 C 141 34 137 44 133 50 C 137 57 134 66 125 69 C 116 72 106 68 101 69 C 95 73 83 74 74 71 C 65 68 59 63 53 65 C 44 66 35 62 31 54 C 27 46 29 42 28 40 Z" />
-      </svg>
-      <span className="absolute inset-0 flex items-center justify-center gap-1 text-[11px] sm:text-xs font-bold text-gray-900">
-        See Details <ArrowUpRight size={13} strokeWidth={2.5} />
-      </span>
-    </div>
-  )
-}
 
 // Exact 4 projects with tall full-page website previews that scroll on hover
 const defaultProjects: Project[] = [
@@ -83,7 +70,6 @@ interface ProjectCardProps {
 
 function ProjectCard({ project, index, isCompact = false }: ProjectCardProps) {
   const bgClass = pastelBgs[index % pastelBgs.length]
-  const showCloudBadge = project.hasCloudBadge || index === 2
 
   return (
     <div className="flex flex-col h-full group/card">
@@ -97,15 +83,6 @@ function ProjectCard({ project, index, isCompact = false }: ProjectCardProps) {
           isCompact ? 'rounded-2xl sm:rounded-[28px] md:rounded-[32px]' : 'rounded-[28px] sm:rounded-[32px]'
         } border border-black`}
       >
-        {/* Scalloped "See Details ↗" Sticker Badge */}
-        {showCloudBadge && (
-          <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-            <div className={isCompact ? 'transform scale-75 sm:scale-90 md:scale-100 origin-center' : ''}>
-              <ScallopDetailsBadge />
-            </div>
-          </div>
-        )}
-      </ImageScrollCard>
 
       {/* Bottom Text Details directly under the frame without hover / shadow */}
       <div className={`${isCompact ? 'pt-2.5 sm:pt-4 md:pt-5' : 'pt-4 sm:pt-5'} flex-1 flex flex-col`}>

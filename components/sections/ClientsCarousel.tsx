@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { Card, Carousel, SectionHeader, GsapSection } from '@/components/ui'
+import { Card, Carousel, SectionHeader, GsapSection, GsapReveal } from '@/components/ui'
 
 interface ClientLogoItem {
   name: string
@@ -55,7 +55,7 @@ export default function ClientsCarousel() {
             showArrows={true}
           >
             {/* Cluster 1: BUMN & Lembaga Nasional */}
-            <div className="flex flex-col">
+            <GsapReveal animation="slide-left" delay={0.1} className="flex flex-col">
               <Card
                 variant="white"
                 rounded="2xl"
@@ -92,10 +92,10 @@ export default function ClientsCarousel() {
                   Sektor Perbankan, Energi, Utilitas &amp; Perkebunan
                 </p>
               </div>
-            </div>
+            </GsapReveal>
 
             {/* Cluster 2: Korporasi Swasta & UMKM */}
-            <div className="flex flex-col">
+            <GsapReveal animation="slide-right" delay={0.2} className="flex flex-col">
               <Card
                 variant="white"
                 rounded="2xl"
@@ -132,7 +132,7 @@ export default function ClientsCarousel() {
                   Sektor Manufaktur, Retail, Bisnis &amp; UMKM
                 </p>
               </div>
-            </div>
+            </GsapReveal>
           </Carousel>
         </div>
 

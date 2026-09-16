@@ -101,7 +101,7 @@ export const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttribut
   ...props
 }, ref) => {
   return (
-    <h3 ref={ref} className={`text-xl font-bold tracking-tight text-gray-900 ${className}`} {...props}>
+    <h3 ref={ref} className={`text-xl font-bold font-display tracking-tight text-gray-900 ${className}`} {...props}>
       {children}
     </h3>
   )
@@ -114,7 +114,7 @@ export const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTML
   ...props
 }, ref) => {
   return (
-    <p ref={ref} className={`text-sm sm:text-[15px] text-gray-600 mt-1.5 leading-relaxed font-normal ${className}`} {...props}>
+    <p ref={ref} className={`text-sm sm:text-[15px] text-gray-600 mt-1.5 leading-relaxed font-body font-normal ${className}`} {...props}>
       {children}
     </p>
   )

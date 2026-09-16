@@ -91,19 +91,7 @@ export function ImageScrollCard({
         </div>
       )}
 
-      {/* Subtle indicator badge when full-page image is scrollable */}
-      {maxScroll > 15 && (
-        <div
-          className={`absolute bottom-2.5 right-2.5 z-20 pointer-events-none transition-opacity duration-300 ${
-            isHovered ? 'opacity-0' : 'opacity-85'
-          }`}
-        >
-          <span className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold bg-black/75 text-white backdrop-blur-xs px-2 py-0.5 rounded-full border border-white/20 shadow-xs">
-            <span>Scroll Preview</span>
-            <span className="text-[11px]">↕</span>
-          </span>
-        </div>
-      )}
+
 
       {/* Gradient Vignette Overlays for realistic webpage frame feel */}
       <div className="absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-black/5 to-transparent pointer-events-none z-10 opacity-60" />
