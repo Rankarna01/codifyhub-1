@@ -17,7 +17,7 @@ export default function Home() {
       {/* <CustomCursor /> */}
       <main className="flex-1 flex flex-col min-h-screen bg-white">
         <Navbar />
-        <Hero />
+        {/* <Hero /> */}
         <MiniStudio />
         <ClientsCarousel />
         <WhatWeBuild />

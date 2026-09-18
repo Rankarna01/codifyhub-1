@@ -82,7 +82,7 @@ function ProjectCard({ project, index, isCompact = false }: ProjectCardProps) {
         className={`aspect-[4/3] sm:aspect-[16/11] ${
           isCompact ? 'rounded-2xl sm:rounded-[28px] md:rounded-[32px]' : 'rounded-[28px] sm:rounded-[32px]'
         } border border-black`}
-      >
+      />
 
       {/* Bottom Text Details directly under the frame without hover / shadow */}
       <div className={`${isCompact ? 'pt-2.5 sm:pt-4 md:pt-5' : 'pt-4 sm:pt-5'} flex-1 flex flex-col`}>
