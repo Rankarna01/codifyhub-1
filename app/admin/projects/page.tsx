@@ -15,9 +15,11 @@ interface Project {
   client_name: string
   link: string
   created_at: string
+  show_on_home: boolean
+  home_order: number
 }
 
-const emptyForm = { title: '', description: '', image_url: '', second_image_url: '', client_name: '', link: '' }
+const emptyForm = { title: '', description: '', image_url: '', second_image_url: '', client_name: '', link: '', show_on_home: true, home_order: 0 }
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([])
@@ -67,7 +69,9 @@ export default function ProjectsPage() {
       image_url: p.image_url,
       second_image_url: p.second_image_url ?? '',
       client_name: p.client_name,
-      link: p.link ?? ''
+      link: p.link ?? '',
+      show_on_home: p.show_on_home ?? true,
+      home_order: p.home_order ?? 0
     })
     setEditId(p.id)
     setImageFile(null)
@@ -251,7 +255,14 @@ export default function ProjectsPage() {
                       </a>
                     )}
                   </div>
-                  {p.client_name && <p className="text-[10px] text-blue-600 font-semibold mb-1.5 bg-blue-50 inline-block px-2 py-0.5 rounded-full">{p.client_name}</p>}
+                  <div className="flex gap-2 items-center mb-1.5 flex-wrap">
+                    {p.client_name && <span className="text-[10px] text-blue-600 font-semibold bg-blue-50 px-2 py-0.5 rounded-full">{p.client_name}</span>}
+                    {p.show_on_home ? (
+                      <span className="text-[10px] bg-green-50 text-green-600 font-semibold px-2 py-0.5 rounded-full">Home #{p.home_order || 0}</span>
+                    ) : (
+                      <span className="text-[10px] bg-gray-100 text-gray-500 font-semibold px-2 py-0.5 rounded-full">Hidden</span>
+                    )}
+                  </div>
                   <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">{p.description}</p>
                 </div>
               </div>
@@ -277,6 +288,20 @@ export default function ProjectsPage() {
               <div>
                 <label className="text-xs font-semibold text-gray-500 mb-1.5 block">Nama Klien</label>
                 <input value={form.client_name} onChange={e => setForm({ ...form, client_name: e.target.value })} className="w-full px-4 py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition" placeholder="PT. / CV. / ..." />
+              </div>
+              
+              <div>
+                <label className="text-xs font-semibold text-gray-500 mb-1.5 block">Tampil di Home & Urutan</label>
+                <div className="flex items-center gap-4 bg-gray-50 p-3 rounded-xl border border-gray-200">
+                  <label className="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-700">
+                    <input type="checkbox" checked={form.show_on_home} onChange={e => setForm({ ...form, show_on_home: e.target.checked })} className="w-4 h-4 text-blue-600 rounded" />
+                    Tampilkan di Home
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-gray-500">Urutan:</span>
+                    <input type="number" disabled={!form.show_on_home} value={form.home_order} onChange={e => setForm({ ...form, home_order: parseInt(e.target.value) || 0 })} className="w-16 px-2 py-1 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-blue-400" />
+                  </div>
+                </div>
               </div>
               
               {/* Gambar Project (Full Page Screenshot) */}

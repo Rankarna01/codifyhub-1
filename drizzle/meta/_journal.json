@@ -8,6 +8,13 @@
       "when": 1787938976330,
       "tag": "0000_broken_master_mold",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789831329606,
+      "tag": "0001_fluffy_chronomancer",
+      "breakpoints": true
     }
   ]
 }

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { ArrowUpRight, LayoutGrid, SlidersHorizontal } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
 import { Button, ProjectGridSkeleton, Carousel, SectionHeader, ImageScrollCard, GsapSection } from '@/components/ui'
+import Link from 'next/link'
 
 interface Project {
   id: string
@@ -128,6 +129,54 @@ function ProjectCard({ project, index, isCompact = false }: ProjectCardProps) {
   )
 }
 
+function ViewAllCard({ index, isCompact = false }: { index: number, isCompact?: boolean }) {
+  const bgClass = pastelBgs[index % pastelBgs.length]
+  
+  return (
+    <div className="flex flex-col h-full group/card">
+      <Link href="/projects" className={`relative block w-full aspect-[4/3] sm:aspect-[16/11] ${isCompact ? 'rounded-2xl sm:rounded-[28px] md:rounded-[32px]' : 'rounded-[28px] sm:rounded-[32px]'} border border-black ${bgClass} flex flex-col items-center justify-center text-center p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 overflow-hidden`}>
+        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center shadow-sm group-hover/card:scale-110 transition-transform duration-300 border border-black/5">
+          <ArrowUpRight size={28} className="text-gray-900" />
+        </div>
+      </Link>
+
+      <div className={`${isCompact ? 'pt-2.5 sm:pt-4 md:pt-5' : 'pt-4 sm:pt-5'} flex-1 flex flex-col`}>
+        <h3
+          className={`${
+            isCompact
+              ? 'text-sm sm:text-lg md:text-2xl line-clamp-2'
+              : 'text-xl sm:text-2xl'
+          } font-bold text-gray-900 tracking-tight leading-snug`}
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
+          View All Projects
+        </h3>
+        <p
+          className={`${
+            isCompact
+              ? 'text-xs sm:text-sm md:text-[15px] line-clamp-2 sm:line-clamp-3 mt-1 sm:mt-2'
+              : 'text-sm sm:text-[15px] mt-2'
+          } text-gray-600 leading-relaxed font-normal`}
+        >
+          Explore our complete portfolio of digital products and web systems.
+        </p>
+        <div className={`${isCompact ? 'pt-2 sm:pt-3' : 'pt-3'} mt-auto`}>
+          <Button
+            variant="black"
+            size="sm"
+            shape="pill"
+            href="/projects"
+            iconRight={<ArrowUpRight size={13} />}
+            className={isCompact ? 'text-xs sm:text-sm py-1 sm:py-2 px-3 sm:px-4' : ''}
+          >
+            See All Work
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Portfolio() {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
@@ -139,14 +188,28 @@ export default function Portfolio() {
         const { data } = await supabase
           .from('projects')
           .select('*')
-          .order('created_at', { ascending: false })
-          .limit(6)
+          .eq('show_on_home', true)
 
         if (data && data.length > 0) {
+          // Sort projects: home_order > 0 first (ascending), then home_order 0 at the end (sorted by created_at desc)
+          const sorted = data.sort((a, b) => {
+            const orderA = a.home_order || 0
+            const orderB = b.home_order || 0
+            
+            if (orderA > 0 && orderB > 0) return orderA - orderB
+            if (orderA > 0) return -1
+            if (orderB > 0) return 1
+            
+            // If both are 0, sort by created_at descending
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          })
+
+          const limitedData = sorted.slice(0, 5)
+
           // Merge with default projects fallback if fewer than 4 exist
-          const merged = data.length >= 4 
-            ? data 
-            : [...data, ...defaultProjects.slice(data.length)]
+          const merged = limitedData.length >= 4 
+            ? limitedData 
+            : [...limitedData, ...defaultProjects.slice(limitedData.length)]
           setProjects(merged)
         } else {
           setProjects(defaultProjects)
@@ -215,6 +278,7 @@ export default function Portfolio() {
               {displayProjects.map((project, i) => (
                 <ProjectCard key={project.id} project={project} index={i} isCompact={true} />
               ))}
+              <ViewAllCard index={displayProjects.length} isCompact={true} />
             </div>
           ) : (
             /* CAROUSEL STYLE (Continuous auto-scroll, smooth snap swipe, never stops on cursor) */
@@ -232,6 +296,7 @@ export default function Portfolio() {
                 {displayProjects.map((project, i) => (
                   <ProjectCard key={project.id} project={project} index={i} isCompact={false} />
                 ))}
+                <ViewAllCard index={displayProjects.length} isCompact={false} />
               </Carousel>
             </div>
           )}

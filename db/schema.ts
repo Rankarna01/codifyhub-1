@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
+import { pgTable, text, timestamp, uuid, boolean, integer } from 'drizzle-orm/pg-core'
 
 export const orders = pgTable('orders', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -22,6 +22,8 @@ export const projects = pgTable('projects', {
   second_image_url: text('second_image_url'),
   client_name: text('client_name'),
   link: text('link'),
+  show_on_home: boolean('show_on_home').default(true).notNull(),
+  home_order: integer('home_order').default(0).notNull(),
   created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 })
 

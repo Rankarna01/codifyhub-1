@@ -23,7 +23,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { title, description, image_url, second_image_url, client_name, link } = body
+    const { title, description, image_url, second_image_url, client_name, link, show_on_home, home_order } = body
 
     if (!title || !description) {
       return NextResponse.json(
@@ -41,6 +41,8 @@ export async function POST(request: Request) {
         second_image_url: second_image_url || null,
         client_name: client_name || null,
         link: link || null,
+        show_on_home: show_on_home !== undefined ? show_on_home : true,
+        home_order: home_order !== undefined ? home_order : 0,
       })
       .returning()
 
