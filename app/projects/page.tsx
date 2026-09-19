@@ -18,12 +18,12 @@ interface Project {
 }
 
 const pastelBgs = [
-  'bg-[#DFEDFA]', // Card 1: Soft Pastel Sky Blue
-  'bg-[#FCF8D5]', // Card 2: Soft Pastel Light Yellow
-  'bg-[#DEE2E8]', // Card 3: Soft Muted Slate Gray
-  'bg-[#DBFA50]', // Card 4: Vibrant Pastel Lime
-  'bg-[#FDE2E4]', // Card 5: Soft Pink
-  'bg-[#E2F0CB]', // Card 6: Mint Green
+  'bg-[#DFEDFA]',
+  'bg-[#FCF8D5]',
+  'bg-[#DEE2E8]',
+  'bg-[#DBFA50]',
+  'bg-[#FDE2E4]',
+  'bg-[#E2F0CB]',
 ]
 
 export default function ProjectsPage() {

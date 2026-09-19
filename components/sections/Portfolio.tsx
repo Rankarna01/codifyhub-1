@@ -162,7 +162,7 @@ function ViewAllCard({ index, isCompact = false }: { index: number, isCompact?: 
         </p>
         <div className={`${isCompact ? 'pt-2 sm:pt-3' : 'pt-3'} mt-auto`}>
           <Button
-            variant="black"
+            variant="white"
             size="sm"
             shape="pill"
             href="/projects"
